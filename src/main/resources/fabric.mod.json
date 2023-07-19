@@ -1,0 +1,40 @@
+{
+	"schemaVersion": 1,
+	"id": "templatemodid",
+	"version": "${version}",
+	"name": "Template Mod",
+	"description": "Template Mod by BananaPuppy",
+	"authors": [
+		"BananaPuppy"
+	],
+	"contact": {
+		"homepage": "https://modrinth.com/user/BananaPuppy",
+		"sources": "https://github.com/BananaPuppy"
+	},
+	"license": "MIT",
+	"icon": "assets/templatemodid/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"net.bananapuppy.templatemodid.MainClass"
+		],
+		"client": [
+			"net.bananapuppy.templatemodid.MainClassClient"
+		],
+		"fabric-datagen": [
+			"net.bananapuppy.templatemodid.ModDataGenerator"
+		]
+	},
+	"mixins": [
+		"template.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.14.21",
+		"minecraft": "~1.20.1",
+		"java": ">=17",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
