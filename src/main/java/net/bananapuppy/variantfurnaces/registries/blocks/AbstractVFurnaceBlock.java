@@ -29,7 +29,6 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.function.ToIntFunction;
 
 public abstract class AbstractVFurnaceBlock
@@ -42,7 +41,6 @@ public abstract class AbstractVFurnaceBlock
     public static final BooleanProperty BLASTING_AUGMENT = BooleanProperty.of("blasting_augment");
     public static final BooleanProperty SMOKE_AUGMENT = BooleanProperty.of("smoke_augment");
     //TODO: SPOOKY
-    //TODO: Recipes
 
     protected AbstractVFurnaceBlock(FabricBlockSettings settings, MapColor color, @Nullable Instrument instrument, Float hardness, Float resistance, int litLuminance, BlockSoundGroup soundGroup, Item... upgradeItem) {
         super(settings.mapColor(color).instrument(instrument).requiresTool().strength(hardness, resistance).luminance(createLightLevelFromLitBlockState(litLuminance)).requiresTool().sounds(soundGroup));
@@ -60,6 +58,7 @@ public abstract class AbstractVFurnaceBlock
             this.upgradeItem.add(item);
         }
     }
+    @SuppressWarnings({"FieldCanBeLocal", "MismatchedQueryAndUpdateOfCollection"})
     private final ArrayList<Item> upgradeItem = new ArrayList<>();
 
     @SuppressWarnings("SameParameterValue")
@@ -70,11 +69,11 @@ public abstract class AbstractVFurnaceBlock
     @SuppressWarnings("deprecation")
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        onUseUpgradeFix(state, world, pos, player, hand, hit); //TODO: lol
+        onUseUpgradeFix(world, pos, player); //TODO: lol
         return ActionResult.FAIL;
     }
 
-    private void onUseUpgradeFix(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit){
+    private void onUseUpgradeFix(World world, BlockPos pos, PlayerEntity player){
         if((player.getMainHandStack().getItem() instanceof AbstractUpgrade) || (player.getOffHandStack().getItem() instanceof AbstractUpgrade)){
             return;
             //return ActionResult.FAIL; //PASS?
