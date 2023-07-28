@@ -304,7 +304,9 @@ public abstract class BaseVFurnaceBlockEntity
         if(!augments[3]){blockEntity.setSmokeAugmented(false);}
 
         //Block Augment State Updater
-        dirty = augmentBlockEntity(state, world, pos, blockEntity);
+        if(augmentBlockEntity(state, world, pos, blockEntity)){
+            dirty = true;
+        }
 
         if (dirty) {
             BaseVFurnaceBlockEntity.markDirty(world, pos, state);

@@ -235,7 +235,6 @@ public class VFurnaceScreenHandler extends ScreenHandler {
 //            }
 //        }
         if (!stack.isEmpty()) {
-            i = fromLast ? endIndex - 1 : startIndex;
             while (fromLast ? i >= startIndex : i < endIndex) {
                 slot = this.slots.get(i);
                 itemStack = slot.getStack();

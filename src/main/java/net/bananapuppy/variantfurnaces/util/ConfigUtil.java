@@ -66,6 +66,7 @@ public class ConfigUtil {
         if(!file.exists()) {
             MainClass.LOGGER.info(MainClass.MOD_TITLE + " Config is missing, generating default one..." );
             // try creating missing files
+            //noinspection ResultOfMethodCallIgnored
             file.getParentFile().mkdirs();
             Files.createFile(file.toPath());
 
