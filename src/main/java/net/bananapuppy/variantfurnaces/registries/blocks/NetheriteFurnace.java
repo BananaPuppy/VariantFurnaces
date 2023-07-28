@@ -1,6 +1,7 @@
 package net.bananapuppy.variantfurnaces.registries.blocks;
 
 import net.bananapuppy.variantfurnaces.registries.ModBlockEntities;
+import net.bananapuppy.variantfurnaces.registries.ModItems;
 import net.bananapuppy.variantfurnaces.registries.blockentities.NetheriteFurnaceBlockEntity;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.BlockState;

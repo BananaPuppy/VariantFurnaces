@@ -1,6 +1,7 @@
 package net.bananapuppy.variantfurnaces.registries.blocks;
 
 import net.bananapuppy.variantfurnaces.registries.ModBlockEntities;
+import net.bananapuppy.variantfurnaces.registries.ModItems;
 import net.bananapuppy.variantfurnaces.registries.blockentities.DiamondFurnaceBlockEntity;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.BlockState;
@@ -23,7 +24,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class DiamondFurnace extends AbstractVFurnaceBlock {
     public DiamondFurnace(FabricBlockSettings settings) {
-        super(settings, MapColor.DIAMOND_BLUE, Blocks.DIAMOND_BLOCK.getDefaultState().getInstrument(), 3.0f, 6.0f, 13, Blocks.DIAMOND_BLOCK.getDefaultState().getSoundGroup());
+        super(settings, MapColor.DIAMOND_BLUE, Blocks.DIAMOND_BLOCK.getDefaultState().getInstrument(), 3.0f, 6.0f, 13, Blocks.DIAMOND_BLOCK.getDefaultState().getSoundGroup(), ModItems.DIAMOND_TO_CRYSTAL_UPGRADE, ModItems.DIAMOND_TO_EMERALD_UPGRADE);
     }
 
     @Override

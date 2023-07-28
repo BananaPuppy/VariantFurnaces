@@ -239,6 +239,7 @@ public abstract class AbstractVFurnaceBlockEntity
     }
 
     public static void tick(World world, BlockPos pos, BlockState state, AbstractVFurnaceBlockEntity blockEntity) {
+
         boolean bl4;
         boolean bl = blockEntity.isBurning();
         boolean dirty = false;

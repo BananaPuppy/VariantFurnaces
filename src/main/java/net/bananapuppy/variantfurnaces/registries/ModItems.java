@@ -5,7 +5,7 @@ import net.bananapuppy.variantfurnaces.registries.items.augments.BlastingAugment
 import net.bananapuppy.variantfurnaces.registries.items.augments.FuelAugment;
 import net.bananapuppy.variantfurnaces.registries.items.augments.SmokeAugment;
 import net.bananapuppy.variantfurnaces.registries.items.augments.SpeedAugment;
-import net.bananapuppy.variantfurnaces.registries.items.upgrades.StoneCopperUpgrade;
+import net.bananapuppy.variantfurnaces.registries.items.upgrades.*;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
@@ -41,6 +41,14 @@ public class ModItems {
 
     //Upgrades
     public static Item STONE_TO_COPPER_UPGRADE = new StoneCopperUpgrade(new FabricItemSettings());
+    public static Item COPPER_TO_IRON_UPGRADE = new CopperIronUpgrade(new FabricItemSettings());
+    public static Item IRON_TO_GOLD_UPGRADE = new IronGoldUpgrade(new FabricItemSettings());
+    public static Item GOLD_TO_DIAMOND_UPGRADE = new GoldDiamondUpgrade(new FabricItemSettings());
+    public static Item DIAMOND_TO_CRYSTAL_UPGRADE = new DiamondCrystalUpgrade(new FabricItemSettings());
+    public static Item DIAMOND_TO_EMERALD_UPGRADE = new DiamondEmeraldUpgrade(new FabricItemSettings());
+    public static Item CRYSTAL_TO_OBSIDIAN_UPGRADE = new CrystalObsidianUpgrade(new FabricItemSettings());
+    public static Item EMERALD_TO_OBSIDIAN_UPGRADE = new EmeraldObsidianUpgrade(new FabricItemSettings());
+    public static Item OBSIDIAN_TO_NETHERITE_UPGRADE = new ObsidianNetheriteUpgrade(new FabricItemSettings());
 
     public static void registerModItems(){
         //Furnaces
@@ -59,6 +67,14 @@ public class ModItems {
         SMOKE_AUGMENT = registerItemToGroup(VFurnacesItemGroup, registerItem("smoke_augment", SMOKE_AUGMENT));
         //Upgrades
         STONE_TO_COPPER_UPGRADE = registerItemToGroup(VFurnacesItemGroup, registerItem("stone_to_copper_upgrade", STONE_TO_COPPER_UPGRADE));
+        COPPER_TO_IRON_UPGRADE = registerItemToGroup(VFurnacesItemGroup, registerItem("copper_to_iron_upgrade", COPPER_TO_IRON_UPGRADE));
+        IRON_TO_GOLD_UPGRADE = registerItemToGroup(VFurnacesItemGroup, registerItem("iron_to_gold_upgrade", IRON_TO_GOLD_UPGRADE));
+        GOLD_TO_DIAMOND_UPGRADE = registerItemToGroup(VFurnacesItemGroup, registerItem("gold_to_diamond_upgrade", GOLD_TO_DIAMOND_UPGRADE));
+        DIAMOND_TO_CRYSTAL_UPGRADE = registerItemToGroup(VFurnacesItemGroup, registerItem("diamond_to_crystal_upgrade", DIAMOND_TO_CRYSTAL_UPGRADE));
+        DIAMOND_TO_EMERALD_UPGRADE = registerItemToGroup(VFurnacesItemGroup, registerItem("diamond_to_emerald_upgrade", DIAMOND_TO_EMERALD_UPGRADE));
+        CRYSTAL_TO_OBSIDIAN_UPGRADE = registerItemToGroup(VFurnacesItemGroup, registerItem("crystal_to_obsidian_upgrade", CRYSTAL_TO_OBSIDIAN_UPGRADE));
+        EMERALD_TO_OBSIDIAN_UPGRADE = registerItemToGroup(VFurnacesItemGroup, registerItem("emerald_to_obsidian_upgrade", EMERALD_TO_OBSIDIAN_UPGRADE));
+        OBSIDIAN_TO_NETHERITE_UPGRADE = registerItemToGroup(VFurnacesItemGroup, registerItem("obsidian_to_netherite_upgrade", OBSIDIAN_TO_NETHERITE_UPGRADE));
     }
 
     public static Item registerItem(String name, Item item) {

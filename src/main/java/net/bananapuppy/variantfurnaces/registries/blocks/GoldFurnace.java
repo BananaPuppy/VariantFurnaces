@@ -1,6 +1,7 @@
 package net.bananapuppy.variantfurnaces.registries.blocks;
 
 import net.bananapuppy.variantfurnaces.registries.ModBlockEntities;
+import net.bananapuppy.variantfurnaces.registries.ModItems;
 import net.bananapuppy.variantfurnaces.registries.blockentities.GoldFurnaceBlockEntity;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.BlockState;
@@ -23,7 +24,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class GoldFurnace extends AbstractVFurnaceBlock {
     public GoldFurnace(FabricBlockSettings settings) {
-        super(settings, MapColor.GOLD, Blocks.GOLD_BLOCK.getDefaultState().getInstrument(), 5.0f, 6.0f, 13, Blocks.GOLD_BLOCK.getDefaultState().getSoundGroup());
+        super(settings, MapColor.GOLD, Blocks.GOLD_BLOCK.getDefaultState().getInstrument(), 5.0f, 6.0f, 13, Blocks.GOLD_BLOCK.getDefaultState().getSoundGroup(), ModItems.GOLD_TO_DIAMOND_UPGRADE);
     }
 
     @Override

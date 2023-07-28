@@ -77,6 +77,7 @@ public abstract class AbstractUpgrade extends Item {
                 ItemStack stack = context.getPlayer().getMainHandStack();
                 stack.setCount(stack.getCount()-1);
             }
+            return ActionResult.CONSUME;
         }
 
         return super.useOnBlock(context);

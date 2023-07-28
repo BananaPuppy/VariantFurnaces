@@ -1,6 +1,7 @@
 package net.bananapuppy.variantfurnaces.registries.blocks;
 
 import net.bananapuppy.variantfurnaces.registries.ModBlockEntities;
+import net.bananapuppy.variantfurnaces.registries.ModItems;
 import net.bananapuppy.variantfurnaces.registries.blockentities.CopperFurnaceBlockEntity;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.BlockState;
@@ -24,7 +25,7 @@ import org.jetbrains.annotations.Nullable;
 public class CopperFurnace extends AbstractVFurnaceBlock {
     //TODO: OxidizableBlock
     public CopperFurnace(FabricBlockSettings settings) {
-        super(settings, MapColor.ORANGE, Blocks.COPPER_BLOCK.getDefaultState().getInstrument(), 3.0f, 6.0f, 13, Blocks.COPPER_BLOCK.getDefaultState().getSoundGroup());
+        super(settings, MapColor.ORANGE, Blocks.COPPER_BLOCK.getDefaultState().getInstrument(), 3.0f, 6.0f, 13, Blocks.COPPER_BLOCK.getDefaultState().getSoundGroup(), ModItems.COPPER_TO_IRON_UPGRADE);
     }
 
     @Override

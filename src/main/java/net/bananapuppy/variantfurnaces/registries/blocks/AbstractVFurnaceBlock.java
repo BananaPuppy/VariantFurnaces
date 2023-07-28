@@ -10,6 +10,7 @@ import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.block.enums.Instrument;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandler;
@@ -27,6 +28,8 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.ToIntFunction;
 
 public abstract class AbstractVFurnaceBlock
@@ -41,7 +44,7 @@ public abstract class AbstractVFurnaceBlock
     //TODO: SPOOKY
     //TODO: Recipes
 
-    protected AbstractVFurnaceBlock(FabricBlockSettings settings, MapColor color, @Nullable Instrument instrument, Float hardness, Float resistance, int litLuminance, BlockSoundGroup soundGroup) {
+    protected AbstractVFurnaceBlock(FabricBlockSettings settings, MapColor color, @Nullable Instrument instrument, Float hardness, Float resistance, int litLuminance, BlockSoundGroup soundGroup, Item... upgradeItem) {
         super(settings.mapColor(color).instrument(instrument).requiresTool().strength(hardness, resistance).luminance(createLightLevelFromLitBlockState(litLuminance)).requiresTool().sounds(soundGroup));
         this.setDefaultState(this.stateManager.getDefaultState()
                 .with(FACING, Direction.NORTH)
@@ -51,7 +54,13 @@ public abstract class AbstractVFurnaceBlock
                 .with(BLASTING_AUGMENT, false)
                 .with(SMOKE_AUGMENT, false)
         );
+        //noinspection ManualArrayToCollectionCopy
+        for(Item item : upgradeItem){
+            //noinspection UseBulkOperation
+            this.upgradeItem.add(item);
+        }
     }
+    private final ArrayList<Item> upgradeItem = new ArrayList<>();
 
     @SuppressWarnings("SameParameterValue")
     private static ToIntFunction<BlockState> createLightLevelFromLitBlockState(int litLevel) {
@@ -61,14 +70,21 @@ public abstract class AbstractVFurnaceBlock
     @SuppressWarnings("deprecation")
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        if(player.getStackInHand(hand).getItem() instanceof AbstractUpgrade){
-            return ActionResult.FAIL; //TODO: PASS?
+        onUseUpgradeFix(state, world, pos, player, hand, hit); //TODO: lol
+        return ActionResult.FAIL;
+    }
+
+    private void onUseUpgradeFix(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit){
+        if((player.getMainHandStack().getItem() instanceof AbstractUpgrade) || (player.getOffHandStack().getItem() instanceof AbstractUpgrade)){
+            return;
+            //return ActionResult.FAIL; //PASS?
         }
         if (world.isClient) {
-            return ActionResult.SUCCESS;
+            return;
+            //return ActionResult.SUCCESS;
         }
         this.openScreen(world, pos, player);
-        return ActionResult.CONSUME;
+        //return ActionResult.CONSUME;
     }
 
     protected abstract void openScreen(World var1, BlockPos var2, PlayerEntity var3);

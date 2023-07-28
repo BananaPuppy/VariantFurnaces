@@ -8,6 +8,9 @@
   "block.variantfurnaces.obsidian_furnace": "Obsidian Furnace",
   "block.variantfurnaces.netherite_furnace": "Netherite Furnace",
 
+  "item.variantfurnaces.fuel_augment": "Furnace Fuel Augment",
+  "item.variantfurnaces.speed_augment": "Furnace Speed Augment",
+
   "tooltip.variantfurnaces.speed_augment.pro": "2x Cooking Speed",
   "tooltip.variantfurnaces.speed_augment.con": "2x Fuel Consumption",
   "tooltip.variantfurnaces.fuel_augment.pro": "1/2 Fuel Consumption",
@@ -20,6 +23,14 @@
   "tooltip.variantfurnaces.smoke_augment.con": "Restricted Cookable Items",
 
   "item.variantfurnaces.stone_to_copper_upgrade": "Stone to Copper Upgrade",
+  "item.variantfurnaces.copper_to_iron_upgrade": "Copper to Iron Upgrade",
+  "item.variantfurnaces.iron_to_gold_upgrade": "Iron to Gold Upgrade",
+  "item.variantfurnaces.gold_to_diamond_upgrade": "Gold to Diamond Upgrade",
+  "item.variantfurnaces.diamond_to_crystal_upgrade": "Diamond to Crystal Upgrade",
+  "item.variantfurnaces.diamond_to_emerald_upgrade": "Diamond to Emerald Upgrade",
+  "item.variantfurnaces.crystal_to_obsidian_upgrade": "Crystal to Obsidian Upgrade",
+  "item.variantfurnaces.emerald_to_obsidian_upgrade": "Emerald to Obsidian Upgrade",
+  "item.variantfurnaces.obsidian_to_netherite_upgrade": "Obsidian to Netherite Upgrade",
 
   "tooltip.variantfurnaces.upgradenote": "Right Click on Furnace"
 }

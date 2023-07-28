@@ -1,7 +1,7 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "variantfurnaces:block/iron/block/iron_furnace_on",
+		"0": "variantfurnaces:block/iron/iron_furnace_on",
 		"1": "minecraft:block/iron_block",
 		"particle": "minecraft:block/iron_block"
 	},

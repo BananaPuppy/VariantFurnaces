@@ -3,12 +3,12 @@
 	"id": "variantfurnaces",
 	"version": "${version}",
 	"name": "Variant Furnaces",
-	"description": "Rewrite/Port of Iron Furnaces",
+	"description": "Upgrade-able Tiered Furnaces.",
 	"authors": [
 		"BananaPuppy"
 	],
 	"contact": {
-		"homepage": "https://modrinth.com/user/BananaPuppy",
+		"homepage": "https://modrinth.com/mod/variant-furnaces",
 		"sources": "https://github.com/BananaPuppy/VariantFurnaces"
 	},
 	"license": "MIT",

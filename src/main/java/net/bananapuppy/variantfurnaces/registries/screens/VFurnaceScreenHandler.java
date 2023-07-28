@@ -29,6 +29,7 @@ public class VFurnaceScreenHandler extends ScreenHandler {
     }
     public VFurnaceScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory, PropertyDelegate delegate, RecipeType<? extends AbstractCookingRecipe> mainRecipeType, @Nullable RecipeType<? extends AbstractCookingRecipe> secondaryRecipeType) {
         super(ModScreenHandlers.VFURNACE_SCREEN_HANDLER, syncId);
+
         checkSize(inventory, AbstractVFurnaceBlockEntity.inventorySize);
 
         this.inventory = inventory;
