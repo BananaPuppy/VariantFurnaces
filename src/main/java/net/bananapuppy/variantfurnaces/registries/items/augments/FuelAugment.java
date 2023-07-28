@@ -18,7 +18,6 @@ public class FuelAugment extends Item {
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        //TODO: text.translatable
         tooltip.add(Text.translatable("tooltip.variantfurnaces.fuel_augment.pro").formatted(Formatting.GREEN));
         tooltip.add(Text.translatable("tooltip.variantfurnaces.fuel_augment.con").formatted(Formatting.RED));
         super.appendTooltip(stack, world, tooltip, context);

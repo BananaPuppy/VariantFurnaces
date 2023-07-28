@@ -39,7 +39,7 @@ public class VFurnaceScreenHandler extends ScreenHandler {
         this.addSlot(new Slot(inventory, 0, 56, 17));
         this.addSlot(new VFurnaceFuelSlot(this, inventory, 1, 56, 53));
         this.addSlot(new FurnaceOutputSlot(playerInventory.player, inventory, 2, 116, 35));
-        //Upgrade Slots TODO: new UpgradeSlot(this, inventory, index, x, y)
+        //Upgrade Slots
         this.addSlot(new VFurnaceAugmentSlot(this, inventory, 3, 147, 8));
         this.addSlot(new VFurnaceAugmentSlot(this, inventory, 4, 147, 26));
         this.addSlot(new VFurnaceAugmentSlot(this, inventory, 5, 147, 44));

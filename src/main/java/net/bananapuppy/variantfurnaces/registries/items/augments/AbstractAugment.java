@@ -31,7 +31,7 @@ public abstract class AbstractAugment extends Item {
         if(!world.isClient()){
             BlockPos pos = context.getBlockPos();
             BlockState block = world.getBlockState(pos);
-            //TODO: Place into furnace with useOnBlock
+            //TODO: Place into Vfurnace with useOnBlock
 //            if(block.isIn()){
 //                if(!block.get(augmentProperty)){
 //                    block = block.with(augmentProperty, true);

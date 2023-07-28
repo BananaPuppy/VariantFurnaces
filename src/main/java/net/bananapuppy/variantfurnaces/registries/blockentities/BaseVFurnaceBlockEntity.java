@@ -280,7 +280,7 @@ public abstract class BaseVFurnaceBlockEntity
                 blockEntity.inventory.get(6).getItem()
         );
         Boolean[] augments = {false, false, false , false};
-        for(Item item : augmentSlots){ //TODO:
+        for(Item item : augmentSlots){
             if(item.equals(ModItems.FUEL_AUGMENT)){
                 augments[0] = true;
                 blockEntity.setFuelAugmented(true);
@@ -518,6 +518,7 @@ public abstract class BaseVFurnaceBlockEntity
     public void unlockLastRecipe(PlayerEntity player, List<ItemStack> ingredients) {
     }
 
+    @SuppressWarnings("unused") //TODO: unused?
     public void dropExperienceForRecipesUsed(ServerPlayerEntity player) {
         List<Recipe<?>> list = this.getRecipesUsedAndDropExperience(player.getServerWorld(), player.getPos());
         player.unlockRecipes(list);
