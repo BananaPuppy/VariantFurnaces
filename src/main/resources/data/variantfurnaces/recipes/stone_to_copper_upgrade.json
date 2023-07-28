@@ -3,18 +3,18 @@
   "pattern":
   [
     "III",
-    "IFI",
+    "IBI",
     "III"
   ],
   "key": {
     "I": {
       "item": "minecraft:copper_ingot"
     },
-    "F": {
-      "item": "minecraft:furnace"
+    "B": {
+      "item": "minecraft:cobblestone"
     }
   },
   "result": {
-    "item": "variantfurnaces:copper_furnace"
+    "item": "variantfurnaces:stone_to_copper_upgrade"
   }
 }

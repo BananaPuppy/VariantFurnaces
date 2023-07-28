@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "III",
+    "IBI",
+    "IMI"
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:diamond"
+    },
+    "B": {
+      "item": "minecraft:gold_ingot"
+    },
+    "M": {
+      "item": "minecraft:diamond_block"
+    }
+  },
+  "result": {
+    "item": "variantfurnaces:gold_to_diamond_upgrade"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "ISI",
+    "SOS",
+    "IBI"
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:netherite_ingot"
+    },
+    "O": {
+      "item": "minecraft:obsidian"
+    },
+    "S": {
+      "item": "minecraft:magma_cream"
+    },
+    "B": {
+      "item": "minecraft:soul_sand"
+    }
+  },
+  "result": {
+    "item": "variantfurnaces:obsidian_to_netherite_upgrade"
+  }
+}

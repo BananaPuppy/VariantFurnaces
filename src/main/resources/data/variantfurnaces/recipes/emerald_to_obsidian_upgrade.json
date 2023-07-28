@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "ISI",
+    "SBS",
+    "ISI"
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:obsidian"
+    },
+    "B": {
+      "item": "minecraft:emerald"
+    },
+    "S": {
+      "item": "minecraft:blaze_rod"
+    }
+  },
+  "result": {
+    "item": "variantfurnaces:emerald_to_obsidian_upgrade"
+  }
+}

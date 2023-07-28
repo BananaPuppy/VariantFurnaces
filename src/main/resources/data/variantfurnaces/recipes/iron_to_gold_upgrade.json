@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "III",
+    "IBI",
+    "IMI"
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:gold_ingot"
+    },
+    "B": {
+      "item": "minecraft:iron_ingot"
+    },
+    "M": {
+      "item": "minecraft:gold_block"
+    }
+  },
+  "result": {
+    "item": "variantfurnaces:iron_to_gold_upgrade"
+  }
+}
