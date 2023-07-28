@@ -28,6 +28,7 @@ Gradle >Tasks >fabric >genSources
 ### Github Publish
 Alt+` >Enable Version Control Integration >Git<br>
 Git >Github >Share Project On Github
+LICENSE
 
 ### Build
 Gradle >Tasks >build >build

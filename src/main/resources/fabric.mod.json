@@ -1,32 +1,32 @@
 {
 	"schemaVersion": 1,
-	"id": "templatemodid",
+	"id": "variantfurnaces",
 	"version": "${version}",
-	"name": "Template Mod",
-	"description": "Template Mod by BananaPuppy",
+	"name": "Variant Furnaces",
+	"description": "Rewrite/Port of Iron Furnaces",
 	"authors": [
 		"BananaPuppy"
 	],
 	"contact": {
 		"homepage": "https://modrinth.com/user/BananaPuppy",
-		"sources": "https://github.com/BananaPuppy"
+		"sources": "https://github.com/BananaPuppy/VariantFurnaces"
 	},
 	"license": "MIT",
-	"icon": "assets/templatemodid/icon.png",
+	"icon": "assets/variantfurnaces/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"net.bananapuppy.templatemodid.MainClass"
+			"net.bananapuppy.variantfurnaces.MainClass"
 		],
 		"client": [
-			"net.bananapuppy.templatemodid.MainClassClient"
+			"net.bananapuppy.variantfurnaces.MainClassClient"
 		],
 		"fabric-datagen": [
-			"net.bananapuppy.templatemodid.ModDataGenerator"
+			"net.bananapuppy.variantfurnaces.ModDataGenerator"
 		]
 	},
 	"mixins": [
-		"template.mixins.json"
+      "variantfurnaces.mixins.json"
 	],
 	"depends": {
 		"fabricloader": ">=0.14.21",

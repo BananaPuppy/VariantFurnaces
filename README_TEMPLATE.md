@@ -1,22 +1,10 @@
-# MoreComposting
-Fully configure what you can compost!<br>
-Comes pre-configured with what I think should be compostable.
+Look at Vanilla Tweaker README
 
-### Config
-***config change requires restart***<br>
-Add / Replace<br>
-- namespace:path chance%<br>
-- ex: "minecraft:rotten_flesh 10%"
-
-Remove<br>
-- -namespace:path<br>
-- ex: "-minecraft:apple"
+# Variant Furnaces
+Upgradeable Tiered Furnaces<br>
+Rewrite/Port of [Iron Furnaces [FABRIC]](https://www.curseforge.com/minecraft/mc-mods/iron-furnaces-fabric)
 
 
 ### Compatibility
 This mod should be compatible with other mods.<br>
-If you find an issue, please [report](https://github.com/BananaPuppy/MoreComposting/issues/new/choose) it.
-
-
-### TODO
-Don't require restart on config change?
+If you find an issue, please [report](https://github.com/BananaPuppy/VariantFurnaces/issues/new/choose) it.

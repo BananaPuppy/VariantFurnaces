@@ -1,0 +1,16 @@
+{
+  "container.variantfurnaces.testfurnace": "Test Furnace Block Entity",
+
+  "block.variantfurnaces.test_furnace": "Test Furnace",
+
+  "tooltip.variantfurnaces.speed_augment.pro": "2x Cooking Speed",
+  "tooltip.variantfurnaces.speed_augment.con": "2x Fuel Consumption",
+  "tooltip.variantfurnaces.fuel_augment.pro": "1/2 Fuel Consumption",
+  "tooltip.variantfurnaces.fuel_augment.con": "3/4 Cooking Speed",
+  "tooltip.variantfurnaces.blasting_augment.pro": "2x Cooking Speed",
+  "tooltip.variantfurnaces.blasting_augment.note": "Speed does not stack with Smoke Augment",
+  "tooltip.variantfurnaces.blasting_augment.con": "Restricted Cookable Items",
+  "tooltip.variantfurnaces.smoke_augment.pro": "2x Cooking Speed",
+  "tooltip.variantfurnaces.smoke_augment.note": "Speed does not stack with Blasting Augment",
+  "tooltip.variantfurnaces.smoke_augment.con": "Restricted Cookable Items"
+}

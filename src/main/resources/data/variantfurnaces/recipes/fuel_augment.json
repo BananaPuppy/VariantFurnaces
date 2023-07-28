@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "SRS",
+    "PAP",
+    "SRS"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:stone"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "P": {
+      "item": "minecraft:paper"
+    },
+    "A": {
+      "item": "minecraft:coal"
+    }
+  },
+  "result": {
+    "item": "variantfurnaces:fuel_augment"
+  }
+}
