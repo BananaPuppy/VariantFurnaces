@@ -1,6 +1,13 @@
 {
   "replace": false,
   "values": [
-    "variantfurnaces:test_furnace"
+    "variantfurnaces:copper_furnace",
+    "variantfurnaces:crystal_furnace",
+    "variantfurnaces:diamond_furnace",
+    "variantfurnaces:emerald_furnace",
+    "variantfurnaces:gold_furnace",
+    "variantfurnaces:iron_furnace",
+    "variantfurnaces:netherite_furnace",
+    "variantfurnaces:obsidian_furnace"
   ]
 }

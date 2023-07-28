@@ -1,0 +1,100 @@
+{
+  "variants": {
+    "facing=east,lit=false": {
+      "model": "variantfurnaces:block/copper/copper_furnace",
+      "y": 90
+    },
+    "facing=east,lit=true": {
+      "model": "variantfurnaces:block/copper/copper_furnace_on",
+      "y": 90
+    },
+    "facing=north,lit=false": {
+      "model": "variantfurnaces:block/copper/copper_furnace"
+    },
+    "facing=north,lit=true": {
+      "model": "variantfurnaces:block/copper/copper_furnace_on"
+    },
+    "facing=south,lit=false": {
+      "model": "variantfurnaces:block/copper/copper_furnace",
+      "y": 180
+    },
+    "facing=south,lit=true": {
+      "model": "variantfurnaces:block/copper/copper_furnace_on",
+      "y": 180
+    },
+    "facing=west,lit=false": {
+      "model": "variantfurnaces:block/copper/copper_furnace",
+      "y": 270
+    },
+    "facing=west,lit=true": {
+      "model": "variantfurnaces:block/copper/copper_furnace_on",
+      "y": 270
+    },
+
+
+
+    "blasting_augment:true,facing=east,lit=false": {
+      "model": "variantfurnaces:block/copper/copper_furnace_blast",
+      "y": 90
+    },
+    "blasting_augment:true,facing=east,lit=true": {
+      "model": "variantfurnaces:block/copper/copper_furnace_blast_on",
+      "y": 90
+    },
+    "blasting_augment:true,facing=north,lit=false": {
+      "model": "variantfurnaces:block/copper/copper_furnace_blast"
+    },
+    "blasting_augment:true,facing=north,lit=true": {
+      "model": "variantfurnaces:block/copper/copper_furnace_blast_on"
+    },
+    "blasting_augment:true,facing=south,lit=false": {
+      "model": "variantfurnaces:block/copper/copper_furnace_blast",
+      "y": 180
+    },
+    "blasting_augment:true,facing=south,lit=true": {
+      "model": "variantfurnaces:block/copper/copper_furnace_blast_on",
+      "y": 180
+    },
+    "blasting_augment:true,facing=west,lit=false": {
+      "model": "variantfurnaces:block/copper/copper_furnace_blast",
+      "y": 270
+    },
+    "blasting_augment:true,facing=west,lit=true": {
+      "model": "variantfurnaces:block/copper/copper_furnace_blast_on",
+      "y": 270
+    },
+
+
+
+    "smoke_augment:true,facing=east,lit=false": {
+      "model": "variantfurnaces:block/copper/copper_furnace_smoke",
+      "y": 90
+    },
+    "smoke_augment:true,facing=east,lit=true": {
+      "model": "variantfurnaces:block/copper/copper_furnace_smoke_on",
+      "y": 90
+    },
+    "smoke_augment:true,facing=north,lit=false": {
+      "model": "variantfurnaces:block/copper/copper_furnace_smoke"
+    },
+    "smoke_augment:true,facing=north,lit=true": {
+      "model": "variantfurnaces:block/copper/copper_furnace_smoke_on"
+    },
+    "smoke_augment:true,facing=south,lit=false": {
+      "model": "variantfurnaces:block/copper/copper_furnace_smoke",
+      "y": 180
+    },
+    "smoke_augment:true,facing=south,lit=true": {
+      "model": "variantfurnaces:block/copper/copper_furnace_smoke_on",
+      "y": 180
+    },
+    "smoke_augment:true,facing=west,lit=false": {
+      "model": "variantfurnaces:block/copper/copper_furnace_smoke",
+      "y": 270
+    },
+    "smoke_augment:true,facing=west,lit=true": {
+      "model": "variantfurnaces:block/copper/copper_furnace_smoke_on",
+      "y": 270
+    }
+  }
+}

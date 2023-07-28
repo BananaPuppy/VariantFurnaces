@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "III",
+    "IFI",
+    "IBI"
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:emerald"
+    },
+    "B": {
+      "item": "minecraft:emerald_block"
+    },
+    "F": {
+      "item": "variantfurnaces:diamond_furnace"
+    }
+  },
+  "result": {
+    "item": "variantfurnaces:emerald_furnace"
+  }
+}

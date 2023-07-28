@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "variantfurnaces:crystal_furnace",
+    "variantfurnaces:diamond_furnace",
+    "variantfurnaces:emerald_furnace",
+    "variantfurnaces:gold_furnace"
+  ]
+}

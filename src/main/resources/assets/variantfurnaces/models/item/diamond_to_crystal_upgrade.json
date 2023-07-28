@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "variantfurnaces:item/diamond_to_crystal_upgrade"
+  }
+}

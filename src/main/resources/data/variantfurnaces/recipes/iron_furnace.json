@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "III",
+    "IFI",
+    "III"
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "F": {
+      "item": "variantfurnaces:copper_furnace"
+    }
+  },
+  "result": {
+    "item": "variantfurnaces:iron_furnace"
+  }
+}

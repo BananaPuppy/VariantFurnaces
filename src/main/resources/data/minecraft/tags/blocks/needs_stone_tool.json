@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "variantfurnaces:test_furnace"
+    "variantfurnaces:copper_furnace",
+    "variantfurnaces:iron_furnace"
   ]
 }

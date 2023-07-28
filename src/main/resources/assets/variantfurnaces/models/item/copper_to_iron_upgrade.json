@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "variantfurnaces:item/copper_to_iron_upgrade"
+  }
+}

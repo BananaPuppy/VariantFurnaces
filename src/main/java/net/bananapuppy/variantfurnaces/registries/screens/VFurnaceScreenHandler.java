@@ -2,7 +2,7 @@ package net.bananapuppy.variantfurnaces.registries.screens;
 
 import net.bananapuppy.variantfurnaces.registries.ModItems;
 import net.bananapuppy.variantfurnaces.registries.ModScreenHandlers;
-import net.bananapuppy.variantfurnaces.registries.blockentities.BaseVFurnaceBlockEntity;
+import net.bananapuppy.variantfurnaces.registries.blockentities.AbstractVFurnaceBlockEntity;
 import net.bananapuppy.variantfurnaces.registries.slots.VFurnaceAugmentSlot;
 import net.bananapuppy.variantfurnaces.registries.slots.VFurnaceFuelSlot;
 import net.minecraft.entity.player.PlayerEntity;
@@ -25,11 +25,11 @@ import java.util.List;
 
 public class VFurnaceScreenHandler extends ScreenHandler {
     public VFurnaceScreenHandler(int syncId, PlayerInventory playerInventory) {
-        this(syncId, playerInventory, new SimpleInventory(BaseVFurnaceBlockEntity.inventorySize), new ArrayPropertyDelegate(BaseVFurnaceBlockEntity.PROPERTY_COUNT), RecipeType.SMELTING, null);
+        this(syncId, playerInventory, new SimpleInventory(AbstractVFurnaceBlockEntity.inventorySize), new ArrayPropertyDelegate(AbstractVFurnaceBlockEntity.PROPERTY_COUNT), RecipeType.SMELTING, null);
     }
     public VFurnaceScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory, PropertyDelegate delegate, RecipeType<? extends AbstractCookingRecipe> mainRecipeType, @Nullable RecipeType<? extends AbstractCookingRecipe> secondaryRecipeType) {
         super(ModScreenHandlers.VFURNACE_SCREEN_HANDLER, syncId);
-        checkSize(inventory, BaseVFurnaceBlockEntity.inventorySize);
+        checkSize(inventory, AbstractVFurnaceBlockEntity.inventorySize);
 
         this.inventory = inventory;
         inventory.onOpen(playerInventory.player);
@@ -93,7 +93,7 @@ public class VFurnaceScreenHandler extends ScreenHandler {
     }
 
     public boolean isFuel(ItemStack itemStack) {
-        return BaseVFurnaceBlockEntity.canUseAsFuel(itemStack);
+        return AbstractVFurnaceBlockEntity.canUseAsFuel(itemStack);
     }
     @SuppressWarnings("RedundantIfStatement")
     private boolean isSmeltable(ItemStack itemStack) {
@@ -107,16 +107,16 @@ public class VFurnaceScreenHandler extends ScreenHandler {
     }
 
     public int getFuelProgress() {
-        int fuelTime = this.propertyDelegate.get(BaseVFurnaceBlockEntity.FUEL_TIME_PROPERTY_INDEX);
+        int fuelTime = this.propertyDelegate.get(AbstractVFurnaceBlockEntity.FUEL_TIME_PROPERTY_INDEX);
         if (fuelTime == 0) {
-            fuelTime = BaseVFurnaceBlockEntity.DEFAULT_COOK_TIME;
+            fuelTime = AbstractVFurnaceBlockEntity.DEFAULT_COOK_TIME;
         }
-        return this.propertyDelegate.get(BaseVFurnaceBlockEntity.BURN_TIME_PROPERTY_INDEX) * 13 / fuelTime;
+        return this.propertyDelegate.get(AbstractVFurnaceBlockEntity.BURN_TIME_PROPERTY_INDEX) * 13 / fuelTime;
     }
 
     public int getCookProgress() {
-        int cookTime = this.propertyDelegate.get(BaseVFurnaceBlockEntity.COOK_TIME_PROPERTY_INDEX);
-        int cookTimeTotal = this.propertyDelegate.get(BaseVFurnaceBlockEntity.COOK_TIME_TOTAL_PROPERTY_INDEX);
+        int cookTime = this.propertyDelegate.get(AbstractVFurnaceBlockEntity.COOK_TIME_PROPERTY_INDEX);
+        int cookTimeTotal = this.propertyDelegate.get(AbstractVFurnaceBlockEntity.COOK_TIME_TOTAL_PROPERTY_INDEX);
         if (cookTimeTotal == 0 || cookTime == 0) {
             return 0;
         }
@@ -287,7 +287,7 @@ public class VFurnaceScreenHandler extends ScreenHandler {
     }
 
     public boolean isBurning(){
-        return propertyDelegate.get(BaseVFurnaceBlockEntity.BURN_TIME_PROPERTY_INDEX) > 0;
+        return propertyDelegate.get(AbstractVFurnaceBlockEntity.BURN_TIME_PROPERTY_INDEX) > 0;
     }
 
 }

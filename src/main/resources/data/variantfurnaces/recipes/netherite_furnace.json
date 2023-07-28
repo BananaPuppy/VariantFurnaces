@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "IMI",
+    "MFM",
+    "ISI"
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:netherite_ingot"
+    },
+    "M": {
+      "item": "minecraft:magma_cream"
+    },
+    "S": {
+      "item": "minecraft:soul_sand"
+    },
+    "F": {
+      "item": "variantfurnaces:obsidian_furnace"
+    }
+  },
+  "result": {
+    "item": "variantfurnaces:netherite_furnace"
+  }
+}
