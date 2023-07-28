@@ -67,9 +67,9 @@ public abstract class AbstractVFurnaceBlockEntity
     public static final int PROPERTY_COUNT = 4;
     public static final int DEFAULT_COOK_TIME = 200;
     int burnTime = 0;
-    int fuelTime = 0;
-    int cookTime = 0;
-    int cookTimeTotal = 0;
+    int fuelTime;
+    int cookTime;
+    int cookTimeTotal;
 
     public float cookTimeTotalSeconds = 10;
 
