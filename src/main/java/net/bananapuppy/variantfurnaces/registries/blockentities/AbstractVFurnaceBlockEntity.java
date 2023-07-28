@@ -398,7 +398,7 @@ public abstract class AbstractVFurnaceBlockEntity
     protected int getFuelTime(ItemStack fuel) {
         if (fuel.isEmpty()) { return 0; }
         Item item = fuel.getItem();
-        int fuelTime = createFuelTimeMap().getOrDefault(item, 0);
+        float fuelTime = createFuelTimeMap().getOrDefault(item, 0);
         if(isFuelAugmented()){
             fuelTime = fuelTime * 2;
         }
@@ -416,7 +416,7 @@ public abstract class AbstractVFurnaceBlockEntity
     }
 
     private static int getCookTime(World world, AbstractVFurnaceBlockEntity furnace) {
-        int cookTime = (int)((float)(furnace.matchGetter.getFirstMatch(furnace, world).map(AbstractCookingRecipe::getCookTime).orElse(DEFAULT_COOK_TIME) / 10) * furnace.cookTimeTotalSeconds);
+        float cookTime = ((float)(furnace.matchGetter.getFirstMatch(furnace, world).map(AbstractCookingRecipe::getCookTime).orElse(DEFAULT_COOK_TIME) / 10) * furnace.cookTimeTotalSeconds);
         if(furnace.isFuelAugmented()){
             cookTime = cookTime * 4 / 3;
         }
