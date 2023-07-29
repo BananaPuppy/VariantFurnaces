@@ -66,9 +66,7 @@ public abstract class AbstractVFurnaceBlockEntity
     public static final int COOK_TIME_TOTAL_PROPERTY_INDEX = 3;
     public static final int PROPERTY_COUNT = 4;
     public static float DEFAULT_COOK_TIME = 200;
-    public float getDefaultCookTime(){
-        return DEFAULT_COOK_TIME;
-    }
+
     int burnTime = 0;
     public int getBurnTime(){
         return this.burnTime;
