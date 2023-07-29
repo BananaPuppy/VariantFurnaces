@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.bananapuppy.variantfurnaces.Config;
+import net.bananapuppy.variantfurnaces.MainClass;
 import net.bananapuppy.variantfurnaces.registries.ModItems;
 import net.bananapuppy.variantfurnaces.registries.blocks.AbstractVFurnaceBlock;
 import net.bananapuppy.variantfurnaces.registries.screens.VFurnaceScreenHandler;
@@ -448,7 +449,8 @@ public abstract class AbstractVFurnaceBlockEntity
     }
 
     private static float getCookTime(World world, AbstractVFurnaceBlockEntity furnace) {
-        float cookTime = ((furnace.matchGetter.getFirstMatch(furnace, world).map(AbstractCookingRecipe::getCookTime).orElse((int)(200 / 10.0f * furnace.cookTimeTotalSeconds))));
+        float cookTime = furnace.matchGetter.getFirstMatch(furnace, world).map(AbstractCookingRecipe::getCookTime).orElse(200);
+        cookTime = cookTime / 10.0f * furnace.cookTimeTotalSeconds;
         if(furnace.isFuelAugmented()){
             cookTime = cookTime * 4 / 3;
         }
