@@ -3,7 +3,8 @@
   "package": "net.bananapuppy.variantfurnaces.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "FurnaceUpgradeMixin"
+    "FurnaceBlockEntityUpgradeAccessor",
+    "FurnaceBlockUpgradeMixin"
   ],
   "injectors": {
     "defaultRequire": 1

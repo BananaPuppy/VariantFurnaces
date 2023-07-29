@@ -1,5 +1,6 @@
 package net.bananapuppy.variantfurnaces.registries.items.upgrades;
 
+import net.bananapuppy.variantfurnaces.mixin.FurnaceBlockEntityUpgradeAccessor;
 import net.bananapuppy.variantfurnaces.registries.blockentities.AbstractVFurnaceBlockEntity;
 import net.bananapuppy.variantfurnaces.registries.blocks.AbstractVFurnaceBlock;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
@@ -70,6 +71,10 @@ public abstract class AbstractUpgrade extends Item {
             }
             if(blockEntity instanceof FurnaceBlockEntity FblockEntity){
                 List<ItemStack> furnaceSlots = getFurnaceItems(FblockEntity);
+                int burntime = ((FurnaceBlockEntityUpgradeAccessor)FblockEntity).getBurnTime();
+                int fuelTime = ((FurnaceBlockEntityUpgradeAccessor)FblockEntity).getFuelTime();
+                int cookTime = ((FurnaceBlockEntityUpgradeAccessor)FblockEntity).getCookTime();
+                int cookTimeTotal = ((FurnaceBlockEntityUpgradeAccessor)FblockEntity).getCookTimeTotal();
 
                 //Clearing inventory happens inside getFurnaceItems() for FurnaceBlockEntity
                 world.setBlockState(pos, this.toBlock.getDefaultState()
@@ -80,7 +85,7 @@ public abstract class AbstractUpgrade extends Item {
                 AbstractVFurnaceBlockEntity toBlockEntity = (AbstractVFurnaceBlockEntity)world.getBlockEntity(pos);
                 if(toBlockEntity != null){
                     setFurnaceItems(toBlockEntity, furnaceSlots);
-                    setFurnaceTimes(toBlockEntity, 1, 1, 1, 200);
+                    setFurnaceTimes(toBlockEntity, burntime, fuelTime, cookTime, cookTimeTotal);
                 }
             }
             world.markDirty(pos);
