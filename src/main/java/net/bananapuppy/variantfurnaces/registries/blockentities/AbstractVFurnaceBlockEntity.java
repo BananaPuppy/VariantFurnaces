@@ -192,9 +192,6 @@ public abstract class AbstractVFurnaceBlockEntity
     protected AbstractVFurnaceBlockEntity(BlockEntityType<?> blockEntityType, BlockPos pos, BlockState state, RecipeType<? extends AbstractCookingRecipe> recipeType) {
         super(blockEntityType, pos, state);
         this.matchGetter = RecipeManager.createCachedMatchGetter(recipeType);
-        DEFAULT_COOK_TIME = 200 * cookTimeTotalSeconds / 10;
-        //TODO: Fixes bug related to upgrading
-        // TODO: lol this.cookTimeTotal = (DEFAULT_COOK_TIME * cookTimeTotalSeconds / 10);
     }
 
     public static Map<Item, Integer> createFuelTimeMap() {
@@ -451,7 +448,7 @@ public abstract class AbstractVFurnaceBlockEntity
     }
 
     private static float getCookTime(World world, AbstractVFurnaceBlockEntity furnace) {
-        float cookTime = ((furnace.matchGetter.getFirstMatch(furnace, world).map(AbstractCookingRecipe::getCookTime).orElse((int)Math.floor(DEFAULT_COOK_TIME)) / 10.0f) * furnace.cookTimeTotalSeconds);
+        float cookTime = ((furnace.matchGetter.getFirstMatch(furnace, world).map(AbstractCookingRecipe::getCookTime).orElse((int)(200 / 10.0f * furnace.cookTimeTotalSeconds))));
         if(furnace.isFuelAugmented()){
             cookTime = cookTime * 4 / 3;
         }
