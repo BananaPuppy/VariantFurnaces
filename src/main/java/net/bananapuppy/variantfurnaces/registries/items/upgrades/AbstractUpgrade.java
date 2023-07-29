@@ -48,9 +48,9 @@ public abstract class AbstractUpgrade extends Item {
             BlockEntity blockEntity = world.getBlockEntity(pos);
             if(blockEntity instanceof AbstractVFurnaceBlockEntity VblockEntity){
                 DefaultedList<ItemStack> oldInv = getFurnaceItems(VblockEntity);
-                int burnTime = VblockEntity.getBurnTime();
+                float burnTime = VblockEntity.getBurnTime();
                 int fuelTime = VblockEntity.getFuelTime();
-                int cookTime = VblockEntity.getCookTime();
+                float cookTime = VblockEntity.getCookTime();
                 float cookTimeTotal = VblockEntity.getCookTimeTotal();
 
                 VblockEntity.setInventory(DefaultedList.ofSize(AbstractVFurnaceBlockEntity.inventorySize, ItemStack.EMPTY));
@@ -127,7 +127,7 @@ public abstract class AbstractUpgrade extends Item {
         blockEntity.setInventory(inventory);
     }
 
-    private void setFurnaceTimes(AbstractVFurnaceBlockEntity blockEntity, int burnTime, int fuelTime, int cookTime, float cookTimeTotal){
+    private void setFurnaceTimes(AbstractVFurnaceBlockEntity blockEntity, float burnTime, int fuelTime, float cookTime, float cookTimeTotal){
         blockEntity.setBurnTime(burnTime);
         blockEntity.setFuelTime(fuelTime);
         blockEntity.setCookTime(cookTime);

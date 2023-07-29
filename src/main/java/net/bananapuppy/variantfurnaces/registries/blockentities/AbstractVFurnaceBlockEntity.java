@@ -67,11 +67,11 @@ public abstract class AbstractVFurnaceBlockEntity
     public static final int PROPERTY_COUNT = 4;
     public static float DEFAULT_COOK_TIME = 200;
 
-    int burnTime = 0;
-    public int getBurnTime(){
+    float burnTime = 0;
+    public float getBurnTime(){
         return this.burnTime;
     }
-    public void setBurnTime(int burnTime){
+    public void setBurnTime(float burnTime){
         this.burnTime = burnTime;
     }
     int fuelTime;
@@ -81,11 +81,11 @@ public abstract class AbstractVFurnaceBlockEntity
     public void setFuelTime(int fuelTime){
         this.fuelTime = fuelTime;
     }
-    int cookTime;
-    public int getCookTime(){
+    float cookTime;
+    public float getCookTime(){
         return this.cookTime;
     }
-    public void setCookTime(int cookTime){
+    public void setCookTime(float cookTime){
         this.cookTime = cookTime;
     }
     float cookTimeTotal;
@@ -143,13 +143,13 @@ public abstract class AbstractVFurnaceBlockEntity
         public int get(int index) {
             switch (index) {
                 case 0: {
-                    return AbstractVFurnaceBlockEntity.this.burnTime;
+                    return (int)AbstractVFurnaceBlockEntity.this.burnTime;
                 }
                 case 1: {
                     return AbstractVFurnaceBlockEntity.this.fuelTime;
                 }
                 case 2: {
-                    return AbstractVFurnaceBlockEntity.this.cookTime;
+                    return (int)AbstractVFurnaceBlockEntity.this.cookTime;
                 }
                 case 3: {
                     return (int) AbstractVFurnaceBlockEntity.this.cookTimeTotal;
@@ -264,7 +264,17 @@ public abstract class AbstractVFurnaceBlockEntity
         boolean bl = blockEntity.isBurning();
         boolean dirty = false;
         if (blockEntity.isBurning()) {
-            --blockEntity.burnTime;
+            float burnDecrement = 1.0f;
+            if(blockEntity.isFuelAugmented()){
+                burnDecrement = burnDecrement / 2.0f;
+            }
+            if(blockEntity.isSpeedAugmented()){
+                burnDecrement = burnDecrement * 2.0f;
+            }
+            blockEntity.burnTime -= burnDecrement;
+            if(blockEntity.burnTime < 1){
+                blockEntity.burnTime = 0;
+            }
         }
         ItemStack itemStack = blockEntity.inventory.get(1);
         boolean bl3 = !blockEntity.inventory.get(BURN_TIME_PROPERTY_INDEX).isEmpty();
@@ -274,7 +284,8 @@ public abstract class AbstractVFurnaceBlockEntity
             Recipe recipe = bl3 ? blockEntity.matchGetter.getFirstMatch(blockEntity, world).orElse(null) : null;
             int i = blockEntity.getMaxCountPerStack();
             if (!blockEntity.isBurning() && AbstractVFurnaceBlockEntity.canAcceptRecipeOutput(world.getRegistryManager(), recipe, blockEntity.inventory, i)) {
-                blockEntity.fuelTime = blockEntity.burnTime = blockEntity.getFuelTime(itemStack);
+                blockEntity.fuelTime = blockEntity.getFuelTime(itemStack);
+                blockEntity.burnTime = blockEntity.getFuelTime(itemStack);
                 if (blockEntity.isBurning()) {
                     dirty = true;
                     if (bl4) {
@@ -288,8 +299,19 @@ public abstract class AbstractVFurnaceBlockEntity
                 }
             }
             if (blockEntity.isBurning() && AbstractVFurnaceBlockEntity.canAcceptRecipeOutput(world.getRegistryManager(), recipe, blockEntity.inventory, i)) {
-                ++blockEntity.cookTime;
-                if (blockEntity.cookTime == Math.floor(blockEntity.cookTimeTotal)) {
+                float cookIncrement = 1;
+                if(blockEntity.isFuelAugmented()){
+                    cookIncrement = cookIncrement * 3.0f / 4.0f;
+                }
+                if(blockEntity.isSpeedAugmented()){
+                    cookIncrement = cookIncrement * 2;
+                }
+                blockEntity.cookTime += cookIncrement;
+                if(blockEntity.cookTime > blockEntity.cookTimeTotal){
+                    blockEntity.cookTime = blockEntity.cookTimeTotal;
+                }
+
+                if (blockEntity.cookTime == blockEntity.cookTimeTotal) {
                     blockEntity.cookTime = 0;
                     blockEntity.cookTimeTotal = AbstractVFurnaceBlockEntity.getCookTime(world, blockEntity);
                     if(blockEntity.cookTimeTotal < 1){//TODO: cookTimeTotal&getCookTime support for cooking more than 1 item per tick
@@ -304,7 +326,7 @@ public abstract class AbstractVFurnaceBlockEntity
                 blockEntity.cookTime = 0;
             }
         } else if (!blockEntity.isBurning() && blockEntity.cookTime > 0) {
-            blockEntity.cookTime = (int)Math.floor(MathHelper.clamp(blockEntity.cookTime - 2, 0, blockEntity.cookTimeTotal));
+            blockEntity.cookTime = MathHelper.clamp(blockEntity.cookTime - 2, 0, blockEntity.cookTimeTotal);
         }
         if (bl != blockEntity.isBurning()) {
             dirty = true;
@@ -431,12 +453,6 @@ public abstract class AbstractVFurnaceBlockEntity
         if (fuel.isEmpty()) { return 0; }
         Item item = fuel.getItem();
         float fuelTime = createFuelTimeMap().getOrDefault(item, 0);
-        if(isFuelAugmented()){
-            fuelTime = fuelTime * 2;
-        }
-        if(isSpeedAugmented()){
-            fuelTime = fuelTime / 2;
-        }
 
         if(Config.fuelScalesWithSpeed){
             fuelTime = (int)(fuelTime * this.cookTimeTotalSeconds / 10);
@@ -450,12 +466,6 @@ public abstract class AbstractVFurnaceBlockEntity
     private static float getCookTime(World world, AbstractVFurnaceBlockEntity furnace) {
         float cookTime = furnace.matchGetter.getFirstMatch(furnace, world).map(AbstractCookingRecipe::getCookTime).orElse(200);
         cookTime = cookTime / 10.0f * furnace.cookTimeTotalSeconds;
-        if(furnace.isFuelAugmented()){
-            cookTime = cookTime * 4 / 3;
-        }
-        if(furnace.isSpeedAugmented()){
-            cookTime = cookTime / 2;
-        }
         if(furnace.isBlastingAugmented() | furnace.isSmokeAugmented()){
             cookTime = cookTime / 2;
         }
