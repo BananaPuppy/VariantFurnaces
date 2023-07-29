@@ -4,7 +4,6 @@ import com.google.common.collect.Lists;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.bananapuppy.variantfurnaces.Config;
-import net.bananapuppy.variantfurnaces.MainClass;
 import net.bananapuppy.variantfurnaces.registries.ModItems;
 import net.bananapuppy.variantfurnaces.registries.blocks.AbstractVFurnaceBlock;
 import net.bananapuppy.variantfurnaces.registries.screens.VFurnaceScreenHandler;
