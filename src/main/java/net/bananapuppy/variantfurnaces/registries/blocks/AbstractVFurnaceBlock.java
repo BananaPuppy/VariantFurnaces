@@ -32,7 +32,7 @@ import java.util.ArrayList;
 import java.util.function.ToIntFunction;
 
 public abstract class AbstractVFurnaceBlock
-        extends BlockWithEntity {
+        extends BlockWithEntity implements BlockEntityProvider {
     public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
     public static final BooleanProperty LIT = Properties.LIT;
 
@@ -69,21 +69,14 @@ public abstract class AbstractVFurnaceBlock
     @SuppressWarnings("deprecation")
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        onUseUpgradeFix(world, pos, player); //TODO: lol
-        return ActionResult.FAIL;
-    }
-
-    private void onUseUpgradeFix(World world, BlockPos pos, PlayerEntity player){
         if((player.getMainHandStack().getItem() instanceof AbstractUpgrade) || (player.getOffHandStack().getItem() instanceof AbstractUpgrade)){
-            return;
-            //return ActionResult.FAIL; //PASS?
+            return ActionResult.FAIL;
         }
         if (world.isClient) {
-            return;
-            //return ActionResult.SUCCESS;
+            return ActionResult.SUCCESS;
         }
         this.openScreen(world, pos, player);
-        //return ActionResult.CONSUME;
+        return ActionResult.CONSUME;
     }
 
     protected abstract void openScreen(World var1, BlockPos var2, PlayerEntity var3);

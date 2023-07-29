@@ -9,7 +9,7 @@ import net.minecraft.util.math.BlockPos;
 public class ObsidianFurnaceBlockEntity extends AbstractVFurnaceBlockEntity {
     public ObsidianFurnaceBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.OBSIDIAN_FURNACE, pos, state, RecipeType.SMELTING);
-        this.cookTimeTotalSeconds = 1;
+        this.cookTimeTotalSeconds = 1.0f;
     }
 
     @Override

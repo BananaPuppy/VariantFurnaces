@@ -110,7 +110,7 @@ public class VFurnaceScreenHandler extends ScreenHandler {
     public int getFuelProgress() {
         int fuelTime = this.propertyDelegate.get(AbstractVFurnaceBlockEntity.FUEL_TIME_PROPERTY_INDEX);
         if (fuelTime == 0) {
-            fuelTime = AbstractVFurnaceBlockEntity.DEFAULT_COOK_TIME;
+            fuelTime = (int)AbstractVFurnaceBlockEntity.DEFAULT_COOK_TIME;
         }
         return this.propertyDelegate.get(AbstractVFurnaceBlockEntity.BURN_TIME_PROPERTY_INDEX) * 13 / fuelTime;
     }

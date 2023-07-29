@@ -16,6 +16,9 @@ import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
@@ -23,6 +26,7 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 public class CopperFurnace extends AbstractVFurnaceBlock {
+
     //TODO: OxidizableBlock
     public CopperFurnace(FabricBlockSettings settings) {
         super(settings, MapColor.ORANGE, Blocks.COPPER_BLOCK.getDefaultState().getInstrument(), 3.0f, 6.0f, 13, Blocks.COPPER_BLOCK.getDefaultState().getSoundGroup(), ModItems.COPPER_TO_IRON_UPGRADE);

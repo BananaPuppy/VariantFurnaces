@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(AbstractFurnaceBlock.class)
-public class FurnaceUpgradeMixin {
+public class FurnaceUpgradeMixin {//TODO: Look into implementing this better
 	@Inject(at = @At("HEAD"), method = "onUse", cancellable = true)
 	private void onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit, CallbackInfoReturnable<ActionResult> cir) {
 		if(state.getBlock() == Blocks.FURNACE){

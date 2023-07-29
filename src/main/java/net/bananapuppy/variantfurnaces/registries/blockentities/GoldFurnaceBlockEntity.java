@@ -9,7 +9,7 @@ import net.minecraft.util.math.BlockPos;
 public class GoldFurnaceBlockEntity extends AbstractVFurnaceBlockEntity {
     public GoldFurnaceBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.GOLD_FURNACE, pos, state, RecipeType.SMELTING);
-        this.cookTimeTotalSeconds = 6;
+        this.cookTimeTotalSeconds = 6.0f;
     }
 
     @Override

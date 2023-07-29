@@ -65,13 +65,40 @@ public abstract class AbstractVFurnaceBlockEntity
     public static final int COOK_TIME_PROPERTY_INDEX = 2;
     public static final int COOK_TIME_TOTAL_PROPERTY_INDEX = 3;
     public static final int PROPERTY_COUNT = 4;
-    public static final int DEFAULT_COOK_TIME = 200;
+    public static float DEFAULT_COOK_TIME = 200;
+    public float getDefaultCookTime(){
+        return DEFAULT_COOK_TIME;
+    }
     int burnTime = 0;
+    public int getBurnTime(){
+        return this.burnTime;
+    }
+    public void setBurnTime(int burnTime){
+        this.burnTime = burnTime;
+    }
     int fuelTime;
+    public int getFuelTime(){
+        return this.fuelTime;
+    }
+    public void setFuelTime(int fuelTime){
+        this.fuelTime = fuelTime;
+    }
     int cookTime;
-    int cookTimeTotal;
+    public int getCookTime(){
+        return this.cookTime;
+    }
+    public void setCookTime(int cookTime){
+        this.cookTime = cookTime;
+    }
+    float cookTimeTotal;
+    public float getCookTimeTotal(){
+        return this.cookTimeTotal;
+    }
+    public void setCookTimeTotal(float cookTimeTotal){
+        this.cookTimeTotal = cookTimeTotal;
+    }
 
-    public float cookTimeTotalSeconds = 10;
+    public float cookTimeTotalSeconds;
 
     public static final int inventorySize = 7;
     protected DefaultedList<ItemStack> inventory = DefaultedList.ofSize(inventorySize, ItemStack.EMPTY);
@@ -80,9 +107,6 @@ public abstract class AbstractVFurnaceBlockEntity
     }
     public void setInventory(DefaultedList<ItemStack> inventory){
         this.inventory = inventory;
-    }
-    public void setInventorySlot(int index, ItemStack stack){
-        this.inventory.set(index, stack);
     }
 
     public boolean fuelAugment = false;
@@ -130,7 +154,7 @@ public abstract class AbstractVFurnaceBlockEntity
                     return AbstractVFurnaceBlockEntity.this.cookTime;
                 }
                 case 3: {
-                    return AbstractVFurnaceBlockEntity.this.cookTimeTotal;
+                    return (int) AbstractVFurnaceBlockEntity.this.cookTimeTotal;
                 }
             }
             return 0;
@@ -170,8 +194,9 @@ public abstract class AbstractVFurnaceBlockEntity
     protected AbstractVFurnaceBlockEntity(BlockEntityType<?> blockEntityType, BlockPos pos, BlockState state, RecipeType<? extends AbstractCookingRecipe> recipeType) {
         super(blockEntityType, pos, state);
         this.matchGetter = RecipeManager.createCachedMatchGetter(recipeType);
-        //Fixes bug related to upgrading
-        this.cookTimeTotal = (int) (DEFAULT_COOK_TIME * cookTimeTotalSeconds / 10);
+        DEFAULT_COOK_TIME = 200 * cookTimeTotalSeconds / 10;
+        //TODO: Fixes bug related to upgrading
+        // TODO: lol this.cookTimeTotal = (DEFAULT_COOK_TIME * cookTimeTotalSeconds / 10);
     }
 
     public static Map<Item, Integer> createFuelTimeMap() {
@@ -227,7 +252,7 @@ public abstract class AbstractVFurnaceBlockEntity
     }
 
     @Override
-    protected void writeNbt(NbtCompound nbt) {
+    public void writeNbt(NbtCompound nbt) {
         super.writeNbt(nbt);
         nbt.putShort("BurnTime", (short)this.burnTime);
         nbt.putShort("CookTime", (short)this.cookTime);
@@ -269,12 +294,14 @@ public abstract class AbstractVFurnaceBlockEntity
             }
             if (blockEntity.isBurning() && AbstractVFurnaceBlockEntity.canAcceptRecipeOutput(world.getRegistryManager(), recipe, blockEntity.inventory, i)) {
                 ++blockEntity.cookTime;
-                if (blockEntity.cookTime == blockEntity.cookTimeTotal) {
+                if (blockEntity.cookTime == Math.floor(blockEntity.cookTimeTotal)) {
                     blockEntity.cookTime = 0;
                     blockEntity.cookTimeTotal = AbstractVFurnaceBlockEntity.getCookTime(world, blockEntity);
-                    //TODO: cookTimeTotal&getCookTime support for cooking more than 1 item per tick
-                    if (AbstractVFurnaceBlockEntity.craftRecipe(world.getRegistryManager(), recipe, blockEntity.inventory, i)) {
-                        blockEntity.setLastRecipe(recipe);
+                    if(blockEntity.cookTimeTotal < 1){//TODO: cookTimeTotal&getCookTime support for cooking more than 1 item per tick
+                        int CooksPerTick = (int)Math.floor(1 / blockEntity.cookTimeTotal);
+                        AbstractVFurnaceBlockEntity.tryCraftRecipe(recipe, world, blockEntity, CooksPerTick);
+                    } else {
+                        AbstractVFurnaceBlockEntity.tryCraftRecipe(recipe, world, blockEntity, 1);
                     }
                     dirty = true;
                 }
@@ -282,7 +309,7 @@ public abstract class AbstractVFurnaceBlockEntity
                 blockEntity.cookTime = 0;
             }
         } else if (!blockEntity.isBurning() && blockEntity.cookTime > 0) {
-            blockEntity.cookTime = MathHelper.clamp(blockEntity.cookTime - 2, 0, blockEntity.cookTimeTotal);
+            blockEntity.cookTime = (int)Math.floor(MathHelper.clamp(blockEntity.cookTime - 2, 0, blockEntity.cookTimeTotal));
         }
         if (bl != blockEntity.isBurning()) {
             dirty = true;
@@ -377,26 +404,35 @@ public abstract class AbstractVFurnaceBlockEntity
         return itemStack2.getCount() < itemStack.getMaxCount();
     }
 
-    private static boolean craftRecipe(DynamicRegistryManager registryManager, @Nullable Recipe<?> recipe, DefaultedList<ItemStack> slots, int count) {
+    private static void tryCraftRecipe(@Nullable Recipe<?> recipe, World world, AbstractVFurnaceBlockEntity blockEntity, int increment){
+        if (AbstractVFurnaceBlockEntity.craftRecipe(world.getRegistryManager(), recipe, blockEntity.inventory, blockEntity.getMaxCountPerStack(), increment)) {
+            blockEntity.setLastRecipe(recipe);
+        }
+    }
+
+    private static boolean craftRecipe(DynamicRegistryManager registryManager, @Nullable Recipe<?> recipe, DefaultedList<ItemStack> slots, int count, int increment) {
         if (recipe == null || !AbstractVFurnaceBlockEntity.canAcceptRecipeOutput(registryManager, recipe, slots, count)) {
             return false;
         }
-        ItemStack itemStack = slots.get(INPUT_SLOT_INDEX);
-        ItemStack itemStack2 = recipe.getOutput(registryManager);
-        ItemStack itemStack3 = slots.get(COOK_TIME_PROPERTY_INDEX);
-        if (itemStack3.isEmpty()) {
-            slots.set(2, itemStack2.copy());
-        } else if (itemStack3.isOf(itemStack2.getItem())) {
-            itemStack3.increment(1);
+        ItemStack stackCooking = slots.get(0);
+        ItemStack stackCookedNew = recipe.getOutput(registryManager);
+        ItemStack stackCooked = slots.get(2);
+        if(stackCooking.getCount() < increment){
+            increment = stackCooking.getCount();
         }
-        if (itemStack.isOf(Blocks.WET_SPONGE.asItem()) && !slots.get(FUEL_TIME_PROPERTY_INDEX).isEmpty() && slots.get(FUEL_SLOT_INDEX).isOf(Items.BUCKET)) {
+        if (stackCooked.isEmpty()) {
+            slots.set(2, stackCookedNew.copy());
+        } else if (stackCooked.isOf(stackCookedNew.getItem())) {
+            stackCooked.increment(increment);
+        }
+        if (stackCooking.isOf(Blocks.WET_SPONGE.asItem()) && !slots.get(1).isEmpty() && slots.get(1).isOf(Items.BUCKET)) {
             slots.set(1, new ItemStack(Items.WATER_BUCKET));
         }
-        itemStack.decrement(1);
+        stackCooking.decrement(increment);
         return true;
     }
 
-    protected int getFuelTime(ItemStack fuel) {
+    public int getFuelTime(ItemStack fuel) {
         if (fuel.isEmpty()) { return 0; }
         Item item = fuel.getItem();
         float fuelTime = createFuelTimeMap().getOrDefault(item, 0);
@@ -416,8 +452,8 @@ public abstract class AbstractVFurnaceBlockEntity
         return (int)fuelTime;
     }
 
-    private static int getCookTime(World world, AbstractVFurnaceBlockEntity furnace) {
-        float cookTime = ((float)(furnace.matchGetter.getFirstMatch(furnace, world).map(AbstractCookingRecipe::getCookTime).orElse(DEFAULT_COOK_TIME) / 10) * furnace.cookTimeTotalSeconds);
+    private static float getCookTime(World world, AbstractVFurnaceBlockEntity furnace) {
+        float cookTime = ((furnace.matchGetter.getFirstMatch(furnace, world).map(AbstractCookingRecipe::getCookTime).orElse((int)Math.floor(DEFAULT_COOK_TIME)) / 10.0f) * furnace.cookTimeTotalSeconds);
         if(furnace.isFuelAugmented()){
             cookTime = cookTime * 4 / 3;
         }
@@ -427,7 +463,7 @@ public abstract class AbstractVFurnaceBlockEntity
         if(furnace.isBlastingAugmented() | furnace.isSmokeAugmented()){
             cookTime = cookTime / 2;
         }
-        return (int)cookTime;
+        return cookTime;
     }
 
     public static boolean canUseAsFuel(ItemStack stack) {
@@ -595,7 +631,7 @@ public abstract class AbstractVFurnaceBlockEntity
             if(isMainSet){
                 secondType = RecipeType.SMOKING;
             } else {
-                secondType = RecipeType.SMOKING;
+                mainType = RecipeType.SMOKING;
             }
         }
         //TODO: Implement secondType (current issue is that maintype and secondarytype are not live updated in ScreenHandler, Maybe not even live updating in other places

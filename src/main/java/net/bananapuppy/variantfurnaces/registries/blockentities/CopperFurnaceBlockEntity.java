@@ -9,7 +9,7 @@ import net.minecraft.util.math.BlockPos;
 public class CopperFurnaceBlockEntity extends AbstractVFurnaceBlockEntity {
     public CopperFurnaceBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.COPPER_FURNACE, pos, state, RecipeType.SMELTING);
-        this.cookTimeTotalSeconds = 9;
+        this.cookTimeTotalSeconds = 9.0f;
     }
 
     @Override
