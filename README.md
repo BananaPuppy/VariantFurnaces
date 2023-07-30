@@ -8,6 +8,7 @@
 ### Current Features
 • Copper, Iron, Gold, Diamond, Emerald, Crystal, Obsidian, and Netherite Furnaces!<br>
 • Fuel & Speed Augment to increase the efficiency of your furnace<br>
+[YT Demo](https://www.youtube.com/watch?v=Mybuo4oQ6tI)
 
 ### Issues & Feature Requests
 This mod should be compatible with other mods<br>
