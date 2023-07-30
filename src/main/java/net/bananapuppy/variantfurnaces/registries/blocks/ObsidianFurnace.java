@@ -1,7 +1,6 @@
 package net.bananapuppy.variantfurnaces.registries.blocks;
 
 import net.bananapuppy.variantfurnaces.registries.ModBlockEntities;
-import net.bananapuppy.variantfurnaces.registries.ModItems;
 import net.bananapuppy.variantfurnaces.registries.blockentities.ObsidianFurnaceBlockEntity;
 import net.bananapuppy.variantfurnaces.registries.items.upgrades.ObsidianNetheriteUpgrade;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;

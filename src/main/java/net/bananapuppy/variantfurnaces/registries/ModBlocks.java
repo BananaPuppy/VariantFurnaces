@@ -2,7 +2,6 @@ package net.bananapuppy.variantfurnaces.registries;
 
 import net.bananapuppy.variantfurnaces.MainClass;
 import net.bananapuppy.variantfurnaces.registries.blocks.*;
-import net.bananapuppy.variantfurnaces.registries.items.upgrades.CopperIronUpgrade;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.registry.Registries;

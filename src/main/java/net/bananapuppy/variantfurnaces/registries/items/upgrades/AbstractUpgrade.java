@@ -1,6 +1,5 @@
 package net.bananapuppy.variantfurnaces.registries.items.upgrades;
 
-import net.bananapuppy.variantfurnaces.MainClass;
 import net.bananapuppy.variantfurnaces.mixin.FurnaceBlockEntityUpgradeAccessor;
 import net.bananapuppy.variantfurnaces.registries.blockentities.AbstractVFurnaceBlockEntity;
 import net.bananapuppy.variantfurnaces.registries.blocks.AbstractVFurnaceBlock;
@@ -14,7 +13,6 @@ import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
-import net.minecraft.nbt.NbtCompound;
 import net.minecraft.state.property.Properties;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
