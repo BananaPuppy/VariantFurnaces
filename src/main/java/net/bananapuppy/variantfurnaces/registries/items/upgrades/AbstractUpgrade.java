@@ -1,5 +1,6 @@
 package net.bananapuppy.variantfurnaces.registries.items.upgrades;
 
+import net.bananapuppy.variantfurnaces.MainClass;
 import net.bananapuppy.variantfurnaces.mixin.FurnaceBlockEntityUpgradeAccessor;
 import net.bananapuppy.variantfurnaces.registries.blockentities.AbstractVFurnaceBlockEntity;
 import net.bananapuppy.variantfurnaces.registries.blocks.AbstractVFurnaceBlock;
@@ -10,15 +11,21 @@ import net.minecraft.block.HorizontalFacingBlock;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.FurnaceBlockEntity;
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUsageContext;
 import net.minecraft.state.property.Properties;
 import net.minecraft.text.Text;
-import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
+import net.minecraft.util.Hand;
+import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.collection.DefaultedList;
+import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Position;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
@@ -40,10 +47,14 @@ public abstract class AbstractUpgrade extends Item {
     }
 
     @Override
-    public ActionResult useOnBlock(ItemUsageContext context) {
-        World world = context.getWorld();
-        BlockPos pos = context.getBlockPos();
+    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
+        HitResult hitResult = user.raycast(4, 0, false);
+        BlockHitResult blockHitResult = (BlockHitResult)hitResult;
+
+        BlockPos pos = blockHitResult.getBlockPos();
+        MainClass.LOGGER.info(String.valueOf(pos));
         BlockState blockState = world.getBlockState(pos);
+
         if(blockState.getBlock() == fromBlock){
             BlockEntity blockEntity = world.getBlockEntity(pos);
             if(blockEntity instanceof AbstractVFurnaceBlockEntity VblockEntity){
@@ -91,14 +102,14 @@ public abstract class AbstractUpgrade extends Item {
                 }
             }
             world.markDirty(pos);
-            if(context.getPlayer() != null && !context.getPlayer().isCreative()){
-                ItemStack stack = context.getPlayer().getMainHandStack();
+            if(!user.isCreative()){
+                ItemStack stack = user.getMainHandStack();
                 stack.setCount(stack.getCount()-1);
             }
-            return ActionResult.CONSUME;
+            return TypedActionResult.success(user.getStackInHand(hand));
         }
 
-        return super.useOnBlock(context);
+        return super.use(world, user, hand);
     }
 
     private List<ItemStack> getFurnaceItems(FurnaceBlockEntity blockEntity){
