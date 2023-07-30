@@ -11,7 +11,7 @@ import net.minecraft.util.Identifier;
 
 public class ModBlocks {
 
-    public static Block COPPER_FURNACE = new CopperFurnace(FabricBlockSettings.create(), CopperIronUpgrade.class);
+    public static Block COPPER_FURNACE = new CopperFurnace(FabricBlockSettings.create());
     public static Block IRON_FURNACE = new IronFurnace(FabricBlockSettings.create());
     public static Block GOLD_FURNACE = new GoldFurnace(FabricBlockSettings.create());
     public static Block DIAMOND_FURNACE = new DiamondFurnace(FabricBlockSettings.create());

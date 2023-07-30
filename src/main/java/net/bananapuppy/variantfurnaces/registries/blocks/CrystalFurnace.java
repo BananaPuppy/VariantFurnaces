@@ -1,9 +1,7 @@
 package net.bananapuppy.variantfurnaces.registries.blocks;
 
 import net.bananapuppy.variantfurnaces.registries.ModBlockEntities;
-import net.bananapuppy.variantfurnaces.registries.ModItems;
 import net.bananapuppy.variantfurnaces.registries.blockentities.CrystalFurnaceBlockEntity;
-import net.bananapuppy.variantfurnaces.registries.items.upgrades.CopperIronUpgrade;
 import net.bananapuppy.variantfurnaces.registries.items.upgrades.CrystalObsidianUpgrade;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.BlockState;
@@ -18,9 +16,6 @@ import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;

@@ -1,7 +1,6 @@
 package net.bananapuppy.variantfurnaces.registries.blocks;
 
 import net.bananapuppy.variantfurnaces.registries.blockentities.AbstractVFurnaceBlockEntity;
-import net.bananapuppy.variantfurnaces.registries.items.upgrades.AbstractUpgrade;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
@@ -10,7 +9,6 @@ import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.block.enums.Instrument;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandler;
