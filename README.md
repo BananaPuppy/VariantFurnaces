@@ -15,11 +15,11 @@ If you have any issues, or have a feature request<br>
 • [Github Issue Tracker](https://github.com/BananaPuppy/VariantFurnaces/issues/new/choose)<br>
 • [Discord](https://discord.gg/6fb4sQjQwk)
 
-### Known Issues & Future Features
-• Using an upgrade on a furnace resets fuel time<br>
-• Using an augment on a furnace doesn't immediately take effect<br>
-• Cannot open furnaces when holding unassociated upgrade item<br>
-• Blasting & Smoke Augments don't work, dw they aren't obtainable in survival mode yet<br>
+### Known Issues
+• Using the stone-copper upgrade resets remaining cook time<br>
+
+### Future Features
+• Blasting & Smoke Augments<BR>
 • Higher than Netherite tier furnaces<br>
 • Furnace Settings similar to Iron Furnaces (*customize face hopper interaction, etc*)<br>
-• API
+• API<br>
