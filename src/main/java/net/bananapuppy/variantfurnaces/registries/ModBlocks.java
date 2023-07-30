@@ -2,6 +2,7 @@ package net.bananapuppy.variantfurnaces.registries;
 
 import net.bananapuppy.variantfurnaces.MainClass;
 import net.bananapuppy.variantfurnaces.registries.blocks.*;
+import net.bananapuppy.variantfurnaces.registries.items.upgrades.CopperIronUpgrade;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.registry.Registries;
@@ -10,7 +11,7 @@ import net.minecraft.util.Identifier;
 
 public class ModBlocks {
 
-    public static Block COPPER_FURNACE = new CopperFurnace(FabricBlockSettings.create());
+    public static Block COPPER_FURNACE = new CopperFurnace(FabricBlockSettings.create(), CopperIronUpgrade.class);
     public static Block IRON_FURNACE = new IronFurnace(FabricBlockSettings.create());
     public static Block GOLD_FURNACE = new GoldFurnace(FabricBlockSettings.create());
     public static Block DIAMOND_FURNACE = new DiamondFurnace(FabricBlockSettings.create());

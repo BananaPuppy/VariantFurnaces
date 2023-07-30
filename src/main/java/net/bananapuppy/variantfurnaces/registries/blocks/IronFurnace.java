@@ -3,6 +3,7 @@ package net.bananapuppy.variantfurnaces.registries.blocks;
 import net.bananapuppy.variantfurnaces.registries.ModBlockEntities;
 import net.bananapuppy.variantfurnaces.registries.ModItems;
 import net.bananapuppy.variantfurnaces.registries.blockentities.IronFurnaceBlockEntity;
+import net.bananapuppy.variantfurnaces.registries.items.upgrades.IronGoldUpgrade;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -24,7 +25,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class IronFurnace extends AbstractVFurnaceBlock {
     public IronFurnace(FabricBlockSettings settings) {
-        super(settings, MapColor.IRON_GRAY, Blocks.IRON_BLOCK.getDefaultState().getInstrument(), 5.0f, 6.0f, 13, Blocks.IRON_BLOCK.getDefaultState().getSoundGroup(), ModItems.IRON_TO_GOLD_UPGRADE);
+        super(settings, MapColor.IRON_GRAY, Blocks.IRON_BLOCK.getDefaultState().getInstrument(), 5.0f, 6.0f, 13, Blocks.IRON_BLOCK.getDefaultState().getSoundGroup(), IronGoldUpgrade.class);
     }
 
     @Override

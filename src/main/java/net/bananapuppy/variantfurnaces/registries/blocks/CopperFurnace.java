@@ -3,6 +3,8 @@ package net.bananapuppy.variantfurnaces.registries.blocks;
 import net.bananapuppy.variantfurnaces.registries.ModBlockEntities;
 import net.bananapuppy.variantfurnaces.registries.ModItems;
 import net.bananapuppy.variantfurnaces.registries.blockentities.CopperFurnaceBlockEntity;
+import net.bananapuppy.variantfurnaces.registries.items.upgrades.AbstractUpgrade;
+import net.bananapuppy.variantfurnaces.registries.items.upgrades.CopperIronUpgrade;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -16,18 +18,39 @@ import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-public class CopperFurnace extends AbstractVFurnaceBlock {
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
+public class CopperFurnace extends AbstractVFurnaceBlock {
     //TODO: OxidizableBlock
-    public CopperFurnace(FabricBlockSettings settings) {
-        super(settings, MapColor.ORANGE, Blocks.COPPER_BLOCK.getDefaultState().getInstrument(), 3.0f, 6.0f, 13, Blocks.COPPER_BLOCK.getDefaultState().getSoundGroup(), ModItems.COPPER_TO_IRON_UPGRADE);
+    public CopperFurnace(FabricBlockSettings settings, Class<?>... upgradeItem) {
+        super(settings, MapColor.ORANGE, Blocks.COPPER_BLOCK.getDefaultState().getInstrument(), 3.0f, 6.0f, 13, Blocks.COPPER_BLOCK.getDefaultState().getSoundGroup(), CopperIronUpgrade.class);
+//        this.upgradeItem.addAll(Arrays.asList(upgradeItem));
     }
+//    ArrayList<Class<?>> upgradeItem = new ArrayList<>();
+
+//    @Override
+//    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+//        for(Class<?> clazz : this.upgradeItem){
+//            if(clazz.isInstance(player.getMainHandStack().getItem())){
+//                return ActionResult.FAIL;
+//            }
+//            if(clazz.isInstance(player.getOffHandStack().getItem())){
+//                return ActionResult.FAIL;
+//            }
+//        }
+//        return super.onUse(state, world, pos, player, hand, hit);
+//    }
 
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {

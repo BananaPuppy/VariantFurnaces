@@ -29,6 +29,7 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.function.ToIntFunction;
 
 public abstract class AbstractVFurnaceBlock
@@ -42,7 +43,7 @@ public abstract class AbstractVFurnaceBlock
     public static final BooleanProperty SMOKE_AUGMENT = BooleanProperty.of("smoke_augment");
     //TODO: SPOOKY
 
-    protected AbstractVFurnaceBlock(FabricBlockSettings settings, MapColor color, @Nullable Instrument instrument, Float hardness, Float resistance, int litLuminance, BlockSoundGroup soundGroup, Item... upgradeItem) {
+    protected AbstractVFurnaceBlock(FabricBlockSettings settings, MapColor color, @Nullable Instrument instrument, Float hardness, Float resistance, int litLuminance, BlockSoundGroup soundGroup, Class<?>... upgradeItem) {
         super(settings.mapColor(color).instrument(instrument).requiresTool().strength(hardness, resistance).luminance(createLightLevelFromLitBlockState(litLuminance)).requiresTool().sounds(soundGroup));
         this.setDefaultState(this.stateManager.getDefaultState()
                 .with(FACING, Direction.NORTH)
@@ -52,14 +53,9 @@ public abstract class AbstractVFurnaceBlock
                 .with(BLASTING_AUGMENT, false)
                 .with(SMOKE_AUGMENT, false)
         );
-        //noinspection ManualArrayToCollectionCopy
-        for(Item item : upgradeItem){
-            //noinspection UseBulkOperation
-            this.upgradeItem.add(item);
-        }
+        this.upgradeItem.addAll(Arrays.asList(upgradeItem));
     }
-    @SuppressWarnings({"FieldCanBeLocal", "MismatchedQueryAndUpdateOfCollection"})
-    private final ArrayList<Item> upgradeItem = new ArrayList<>();
+    private final ArrayList<Class<?>> upgradeItem = new ArrayList<>();
 
     @SuppressWarnings("SameParameterValue")
     private static ToIntFunction<BlockState> createLightLevelFromLitBlockState(int litLevel) {
@@ -69,8 +65,13 @@ public abstract class AbstractVFurnaceBlock
     @SuppressWarnings("deprecation")
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        if((player.getMainHandStack().getItem() instanceof AbstractUpgrade) || (player.getOffHandStack().getItem() instanceof AbstractUpgrade)){
-            return ActionResult.FAIL;
+        for(Class<?> clazz : this.upgradeItem){
+            if(clazz.isInstance(player.getMainHandStack().getItem())){
+                return ActionResult.FAIL;
+            }
+            if(clazz.isInstance(player.getOffHandStack().getItem())){
+                return ActionResult.FAIL;
+            }
         }
         if (world.isClient) {
             return ActionResult.SUCCESS;

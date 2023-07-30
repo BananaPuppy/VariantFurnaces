@@ -3,6 +3,7 @@ package net.bananapuppy.variantfurnaces.registries.blocks;
 import net.bananapuppy.variantfurnaces.registries.ModBlockEntities;
 import net.bananapuppy.variantfurnaces.registries.ModItems;
 import net.bananapuppy.variantfurnaces.registries.blockentities.ObsidianFurnaceBlockEntity;
+import net.bananapuppy.variantfurnaces.registries.items.upgrades.ObsidianNetheriteUpgrade;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -24,7 +25,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class ObsidianFurnace extends AbstractVFurnaceBlock {
     public ObsidianFurnace(FabricBlockSettings settings) {
-        super(settings, MapColor.BLACK, Blocks.OBSIDIAN.getDefaultState().getInstrument(), 50.0f, 1200.0f, 13, Blocks.OBSIDIAN.getSoundGroup(Blocks.OBSIDIAN.getDefaultState()), ModItems.OBSIDIAN_TO_NETHERITE_UPGRADE);
+        super(settings, MapColor.BLACK, Blocks.OBSIDIAN.getDefaultState().getInstrument(), 50.0f, 1200.0f, 13, Blocks.OBSIDIAN.getSoundGroup(Blocks.OBSIDIAN.getDefaultState()), ObsidianNetheriteUpgrade.class);
     }
 
     @Override

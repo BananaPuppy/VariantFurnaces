@@ -1,5 +1,6 @@
 package net.bananapuppy.variantfurnaces.registries.items.upgrades;
 
+import net.bananapuppy.variantfurnaces.MainClass;
 import net.bananapuppy.variantfurnaces.mixin.FurnaceBlockEntityUpgradeAccessor;
 import net.bananapuppy.variantfurnaces.registries.blockentities.AbstractVFurnaceBlockEntity;
 import net.bananapuppy.variantfurnaces.registries.blocks.AbstractVFurnaceBlock;
@@ -13,6 +14,7 @@ import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.state.property.Properties;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
@@ -73,7 +75,9 @@ public abstract class AbstractUpgrade extends Item {
                 List<ItemStack> furnaceSlots = getFurnaceItems(FblockEntity);
                 int burntime = ((FurnaceBlockEntityUpgradeAccessor)FblockEntity).getBurnTime();
                 int fuelTime = ((FurnaceBlockEntityUpgradeAccessor)FblockEntity).getFuelTime();
-                int cookTime = ((FurnaceBlockEntityUpgradeAccessor)FblockEntity).getCookTime();
+
+                int cookTime = ((FurnaceBlockEntityUpgradeAccessor)FblockEntity).getCookTime(); //TODO: Fix cookTime not translating on stone-copper upgrade
+
                 int cookTimeTotal = ((FurnaceBlockEntityUpgradeAccessor)FblockEntity).getCookTimeTotal();
 
                 //Clearing inventory happens inside getFurnaceItems() for FurnaceBlockEntity
