@@ -2,8 +2,6 @@ package net.bananapuppy.variantfurnaces.util;
 
 import net.bananapuppy.variantfurnaces.registries.*;
 import net.bananapuppy.variantfurnaces.registries.screens.VFurnaceScreen;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
 
 public class ModRegistries {

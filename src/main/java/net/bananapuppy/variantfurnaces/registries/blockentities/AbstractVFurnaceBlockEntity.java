@@ -13,7 +13,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
-import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.block.entity.LockableContainerBlockEntity;
 import net.minecraft.entity.ExperienceOrbEntity;
@@ -293,7 +292,6 @@ public abstract class AbstractVFurnaceBlockEntity
                 blockEntity.fuelTime = blockEntity.getFuelTime(itemStack);
                 blockEntity.burnTime = blockEntity.getFuelTime(itemStack);
                 if (blockEntity.isBurning()) {
-                    dirty = true;
                     if (fuelSlotNotEmpty) {
                         Item item = itemStack.getItem();
                         itemStack.decrement(1);
@@ -304,7 +302,7 @@ public abstract class AbstractVFurnaceBlockEntity
                     }
                 }
             }
-            if (blockEntity.isBurning() && AbstractVFurnaceBlockEntity.canAcceptRecipeOutput(world.getRegistryManager(), recipe, blockEntity.inventory, i)) { dirty = true;
+            if (blockEntity.isBurning() && AbstractVFurnaceBlockEntity.canAcceptRecipeOutput(world.getRegistryManager(), recipe, blockEntity.inventory, i)) {
                 float cookIncrement = 1;
                 if(blockEntity.isFuelAugmented()){
                     cookIncrement = cookIncrement * 3.0f / 4.0f;
@@ -326,7 +324,6 @@ public abstract class AbstractVFurnaceBlockEntity
                     } else {
                         AbstractVFurnaceBlockEntity.tryCraftRecipe(recipe, world, blockEntity, 1);
                     }
-                    dirty = true;
                 }
             } else {
                 blockEntity.cookTime = 0;
@@ -334,7 +331,7 @@ public abstract class AbstractVFurnaceBlockEntity
         } else if (!blockEntity.isBurning() && blockEntity.cookTime > 0) { dirty = true;
             blockEntity.cookTime = MathHelper.clamp(blockEntity.cookTime - 2, 0, blockEntity.cookTimeTotal);
         }
-        if (bl != blockEntity.isBurning()) { dirty = true;
+        if (bl != blockEntity.isBurning()) {
             dirty = true;
             state = state.with(AbstractVFurnaceBlock.LIT, blockEntity.isBurning());
             world.setBlockState(pos, state, Block.NOTIFY_ALL);
