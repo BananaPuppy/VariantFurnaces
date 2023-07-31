@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.bananapuppy.variantfurnaces.Config;
+import net.bananapuppy.variantfurnaces.MainClass;
 import net.bananapuppy.variantfurnaces.registries.ModItems;
 import net.bananapuppy.variantfurnaces.registries.blocks.AbstractVFurnaceBlock;
 import net.bananapuppy.variantfurnaces.registries.screens.VFurnaceScreenHandler;
@@ -12,6 +13,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
+import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.block.entity.LockableContainerBlockEntity;
 import net.minecraft.entity.ExperienceOrbEntity;
@@ -240,6 +242,8 @@ public abstract class AbstractVFurnaceBlockEntity
         this.cookTime = nbt.getShort("CookTime");
         this.cookTimeTotal = nbt.getShort("CookTimeTotal");
         this.fuelTime = this.getFuelTime(this.inventory.get(1));
+        this.fuelAugment = nbt.getBoolean("FuelAugmented");
+        this.speedAugment = nbt.getBoolean("SpeedAugmented");
         NbtCompound nbtCompound = nbt.getCompound("RecipesUsed");
         for (String string : nbtCompound.getKeys()) {
             this.recipesUsed.put(new Identifier(string), nbtCompound.getInt(string));
@@ -252,6 +256,8 @@ public abstract class AbstractVFurnaceBlockEntity
         nbt.putShort("BurnTime", (short)this.burnTime);
         nbt.putShort("CookTime", (short)this.cookTime);
         nbt.putShort("CookTimeTotal", (short)this.cookTimeTotal);
+        nbt.putBoolean("FuelAugmented", this.fuelAugment);
+        nbt.putBoolean("SpeedAugmented", this.speedAugment);
         Inventories.writeNbt(nbt, this.inventory);
         NbtCompound nbtCompound = new NbtCompound();
         this.recipesUsed.forEach((identifier, count) -> nbtCompound.putInt(identifier.toString(), count));
@@ -259,11 +265,11 @@ public abstract class AbstractVFurnaceBlockEntity
     }
 
     public static void tick(World world, BlockPos pos, BlockState state, AbstractVFurnaceBlockEntity blockEntity) {
-
-        boolean bl4;
+        //TODO: Review markdirty instances, markdirty is performance heavy and should only be done when necessary
+        boolean fuelSlotNotEmpty;
         boolean bl = blockEntity.isBurning();
         boolean dirty = false;
-        if (blockEntity.isBurning()) {
+        if (blockEntity.isBurning()) { dirty = true;
             float burnDecrement = 1.0f;
             if(blockEntity.isFuelAugmented()){
                 burnDecrement = burnDecrement / 2.0f;
@@ -277,18 +283,18 @@ public abstract class AbstractVFurnaceBlockEntity
             }
         }
         ItemStack itemStack = blockEntity.inventory.get(1);
-        boolean bl3 = !blockEntity.inventory.get(BURN_TIME_PROPERTY_INDEX).isEmpty();
-        bl4 = !itemStack.isEmpty();
-        if (blockEntity.isBurning() || bl4 && bl3) {
+        boolean cookingSlotNotEmpty = !blockEntity.inventory.get(0).isEmpty();
+        fuelSlotNotEmpty = !itemStack.isEmpty();
+        if (blockEntity.isBurning() || fuelSlotNotEmpty && cookingSlotNotEmpty) { dirty = true;
             @SuppressWarnings("rawtypes")
-            Recipe recipe = bl3 ? blockEntity.matchGetter.getFirstMatch(blockEntity, world).orElse(null) : null;
+            Recipe recipe = cookingSlotNotEmpty ? blockEntity.matchGetter.getFirstMatch(blockEntity, world).orElse(null) : null;
             int i = blockEntity.getMaxCountPerStack();
             if (!blockEntity.isBurning() && AbstractVFurnaceBlockEntity.canAcceptRecipeOutput(world.getRegistryManager(), recipe, blockEntity.inventory, i)) {
                 blockEntity.fuelTime = blockEntity.getFuelTime(itemStack);
                 blockEntity.burnTime = blockEntity.getFuelTime(itemStack);
                 if (blockEntity.isBurning()) {
                     dirty = true;
-                    if (bl4) {
+                    if (fuelSlotNotEmpty) {
                         Item item = itemStack.getItem();
                         itemStack.decrement(1);
                         if (itemStack.isEmpty()) {
@@ -298,7 +304,7 @@ public abstract class AbstractVFurnaceBlockEntity
                     }
                 }
             }
-            if (blockEntity.isBurning() && AbstractVFurnaceBlockEntity.canAcceptRecipeOutput(world.getRegistryManager(), recipe, blockEntity.inventory, i)) {
+            if (blockEntity.isBurning() && AbstractVFurnaceBlockEntity.canAcceptRecipeOutput(world.getRegistryManager(), recipe, blockEntity.inventory, i)) { dirty = true;
                 float cookIncrement = 1;
                 if(blockEntity.isFuelAugmented()){
                     cookIncrement = cookIncrement * 3.0f / 4.0f;
@@ -325,10 +331,10 @@ public abstract class AbstractVFurnaceBlockEntity
             } else {
                 blockEntity.cookTime = 0;
             }
-        } else if (!blockEntity.isBurning() && blockEntity.cookTime > 0) {
+        } else if (!blockEntity.isBurning() && blockEntity.cookTime > 0) { dirty = true;
             blockEntity.cookTime = MathHelper.clamp(blockEntity.cookTime - 2, 0, blockEntity.cookTimeTotal);
         }
-        if (bl != blockEntity.isBurning()) {
+        if (bl != blockEntity.isBurning()) { dirty = true;
             dirty = true;
             state = state.with(AbstractVFurnaceBlock.LIT, blockEntity.isBurning());
             world.setBlockState(pos, state, Block.NOTIFY_ALL);
@@ -360,10 +366,10 @@ public abstract class AbstractVFurnaceBlockEntity
                 blockEntity.setSmokeAugmented(true);
             }
         }
-        if(!augments[0]){blockEntity.setFuelAugmented(false);}
-        if(!augments[1]){blockEntity.setSpeedAugmented(false);}
-        if(!augments[2]){blockEntity.setBlastingAugmented(false);}
-        if(!augments[3]){blockEntity.setSmokeAugmented(false);}
+        if(!augments[0]){ blockEntity.setFuelAugmented(false); dirty = true; }
+        if(!augments[1]){ blockEntity.setSpeedAugmented(false); dirty = true; }
+        if(!augments[2]){ blockEntity.setBlastingAugmented(false); dirty = true; }
+        if(!augments[3]){ blockEntity.setSmokeAugmented(false); dirty = true; }
 
         //Block Augment State Updater
         if(augmentBlockEntity(state, world, pos, blockEntity)){
@@ -372,6 +378,7 @@ public abstract class AbstractVFurnaceBlockEntity
 
         if (dirty) {
             AbstractVFurnaceBlockEntity.markDirty(world, pos, state);
+            markDirty(world, pos, state);
         }
     }
 
@@ -640,6 +647,7 @@ public abstract class AbstractVFurnaceBlockEntity
                 mainType = RecipeType.SMOKING;
             }
         }
+        MainClass.LOGGER.info("LINE CHECK 3");
         //TODO: Implement secondType (current issue is that maintype and secondarytype are not live updated in ScreenHandler, Maybe not even live updating in other places
         return new VFurnaceScreenHandler(syncId, playerInventory, this, this.propertyDelegate, mainType, secondType);
     }

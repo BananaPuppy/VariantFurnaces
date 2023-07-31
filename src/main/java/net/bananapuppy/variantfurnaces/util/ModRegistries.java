@@ -1,10 +1,15 @@
 package net.bananapuppy.variantfurnaces.util;
 
 import net.bananapuppy.variantfurnaces.registries.*;
+import net.bananapuppy.variantfurnaces.registries.screens.VFurnaceScreen;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.gui.screen.ingame.HandledScreens;
 
 public class ModRegistries {
 
     public static void registerModStuff(){
+
         ModCommands.registerModCommands();
         ModItems.registerModItems();
 
@@ -12,5 +17,12 @@ public class ModRegistries {
         ModBlockEntities.registerModBlockEntities();
 
         ModBlocks.registerModBlocks();
+    }
+
+    public static void registerModStuffClient(){
+
+        //ModScreenHandlers.registerModScreenHandlers();
+
+        HandledScreens.register(ModScreenHandlers.VFURNACE_SCREEN_HANDLER, VFurnaceScreen::new);
     }
 }
