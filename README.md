@@ -18,6 +18,7 @@ If you have any issues, or have a feature request<br>
 
 ### Known Issues
 • Using the stone-copper upgrade resets remaining cook time<br>
+• Using an upgrade drops furnace xp instead of keeping it stored inside of the furnace<br>
 
 ### Future Features
 • Blasting & Smoke Augments<BR>
