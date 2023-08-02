@@ -4,7 +4,6 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import net.bananapuppy.variantfurnaces.Config;
 import net.fabricmc.loader.api.FabricLoader;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
@@ -72,7 +71,7 @@ public class ConfigManager {
             JsonObject json = jsonFromFile();
 
             Set<String> keys = json.keySet();
-            Class<Config> configClass = Config.class;
+            Class<?> configClass = this.configClazz;
             for (String key : keys) {
                 Field field = configClass.getField(key);
                 if (field.getType() == boolean.class) {
