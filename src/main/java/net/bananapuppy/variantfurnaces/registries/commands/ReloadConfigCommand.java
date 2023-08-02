@@ -3,7 +3,7 @@ package net.bananapuppy.variantfurnaces.registries.commands;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
 import net.bananapuppy.variantfurnaces.MainClass;
-import net.bananapuppy.variantfurnaces.util.ConfigUtil;
+import net.bananapuppy.variantfurnaces.util.ConfigManager;
 import net.minecraft.command.CommandRegistryAccess;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
@@ -11,7 +11,7 @@ import net.minecraft.server.command.ServerCommandSource;
 public class ReloadConfigCommand {
 
     public static int run(CommandContext<ServerCommandSource> context) {
-        ConfigUtil.configRead();
+        MainClass.CONFIG_MANAGER.writeFileToFields();
         return 1;
     }
 

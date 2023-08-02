@@ -32,5 +32,9 @@
   "item.variantfurnaces.emerald_to_obsidian_upgrade": "Emerald to Obsidian Upgrade",
   "item.variantfurnaces.obsidian_to_netherite_upgrade": "Obsidian to Netherite Upgrade",
 
-  "tooltip.variantfurnaces.upgradenote": "Right Click on Furnace"
+  "tooltip.variantfurnaces.upgradenote": "Right Click on Furnace",
+
+  "modmenu.variantfurnaces.configtitle": "Variant Furnaces Config",
+  "modmenu.variantfurnaces.category.general": "General",
+  "modmenu.variantfurnaces.category.general.options.fuelScalesWithSpeed": "Fuel Consumption Scales with Base Furnace Speed"
 }

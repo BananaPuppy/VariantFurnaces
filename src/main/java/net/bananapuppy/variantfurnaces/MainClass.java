@@ -1,6 +1,6 @@
 package net.bananapuppy.variantfurnaces;
 
-import net.bananapuppy.variantfurnaces.util.ConfigUtil;
+import net.bananapuppy.variantfurnaces.util.ConfigManager;
 import net.bananapuppy.variantfurnaces.util.ModRegistries;
 import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
@@ -14,13 +14,12 @@ public class MainClass implements ModInitializer {
 	public static final String MOD_TITLE = "Variant Furnaces";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
+	public static ConfigManager CONFIG_MANAGER = new ConfigManager(1, MOD_ID, LOGGER, Config.class).init();
 	//Config Var Init
-
 
 	@Override
 	public void onInitialize() {
 		LOGGER.info(MOD_TITLE + " Server Initializing...");
-		ConfigUtil.configInit();
 
 		ModRegistries.registerModStuff();
 

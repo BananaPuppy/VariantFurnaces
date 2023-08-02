@@ -23,6 +23,9 @@
 		],
 		"fabric-datagen": [
 			"net.bananapuppy.variantfurnaces.ModDataGenerator"
+		],
+		"modmenu": [
+			"net.bananapuppy.variantfurnaces.util.ModMenu"
 		]
 	},
 	"mixins": [
@@ -35,6 +38,7 @@
 		"fabric-api": "*"
 	},
 	"suggests": {
-		"another-mod": "*"
+		"modmenu": ">=7.1.0",
+		"cloth-config-fabric": ">=11.1.106"
 	}
 }

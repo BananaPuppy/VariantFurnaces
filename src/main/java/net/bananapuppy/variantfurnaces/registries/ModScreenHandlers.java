@@ -14,7 +14,7 @@ public class ModScreenHandlers {
 
     public static void registerModScreenHandlers(){
         VFURNACE_SCREEN_HANDLER = Registry.register(Registries.SCREEN_HANDLER, new Identifier(MainClass.MOD_ID, "vfurnace_screenhandler"), VFURNACE_SCREEN_HANDLER);
-        //VFURNACE_SCREEN_HANDLER =
     }
+
 
 }

@@ -1,6 +1,7 @@
 package net.bananapuppy.variantfurnaces;
 
 public class Config {
+    //TODO: Easy ModMenu Category, Option Title/Tooltip Definitions
     public static boolean fuelScalesWithSpeed = false;
 //    public static boolean configurableBool = true;
 //    public static int configurableInt = 69;

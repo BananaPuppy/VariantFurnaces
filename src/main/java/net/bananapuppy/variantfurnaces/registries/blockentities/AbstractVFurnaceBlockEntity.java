@@ -237,12 +237,15 @@ public abstract class AbstractVFurnaceBlockEntity
         super.readNbt(nbt);
         this.inventory = DefaultedList.ofSize(this.size(), ItemStack.EMPTY);
         Inventories.readNbt(nbt, this.inventory);
+
         this.burnTime = nbt.getShort("BurnTime");
+        this.fuelTime = nbt.getShort("FuelTime");
         this.cookTime = nbt.getShort("CookTime");
         this.cookTimeTotal = nbt.getShort("CookTimeTotal");
-        this.fuelTime = this.getFuelTime(this.inventory.get(1));
+
         this.fuelAugment = nbt.getBoolean("FuelAugmented");
         this.speedAugment = nbt.getBoolean("SpeedAugmented");
+
         NbtCompound nbtCompound = nbt.getCompound("RecipesUsed");
         for (String string : nbtCompound.getKeys()) {
             this.recipesUsed.put(new Identifier(string), nbtCompound.getInt(string));
@@ -252,11 +255,15 @@ public abstract class AbstractVFurnaceBlockEntity
     @Override
     public void writeNbt(NbtCompound nbt) {
         super.writeNbt(nbt);
+
         nbt.putShort("BurnTime", (short)this.burnTime);
+        nbt.putShort("FuelTime", (short)this.fuelTime);
         nbt.putShort("CookTime", (short)this.cookTime);
         nbt.putShort("CookTimeTotal", (short)this.cookTimeTotal);
+
         nbt.putBoolean("FuelAugmented", this.fuelAugment);
         nbt.putBoolean("SpeedAugmented", this.speedAugment);
+
         Inventories.writeNbt(nbt, this.inventory);
         NbtCompound nbtCompound = new NbtCompound();
         this.recipesUsed.forEach((identifier, count) -> nbtCompound.putInt(identifier.toString(), count));
@@ -276,6 +283,9 @@ public abstract class AbstractVFurnaceBlockEntity
             if(blockEntity.isSpeedAugmented()){
                 burnDecrement = burnDecrement * 2.0f;
             }
+            if(Config.fuelScalesWithSpeed){
+                burnDecrement = burnDecrement / (blockEntity.cookTimeTotalSeconds / 10); //TODO: Check Math
+            }
             blockEntity.burnTime -= burnDecrement;
             if(blockEntity.burnTime < 1){
                 blockEntity.burnTime = 0;
@@ -290,7 +300,7 @@ public abstract class AbstractVFurnaceBlockEntity
             int i = blockEntity.getMaxCountPerStack();
             if (!blockEntity.isBurning() && AbstractVFurnaceBlockEntity.canAcceptRecipeOutput(world.getRegistryManager(), recipe, blockEntity.inventory, i)) {
                 blockEntity.fuelTime = blockEntity.getFuelTime(itemStack);
-                blockEntity.burnTime = blockEntity.getFuelTime(itemStack);
+                blockEntity.burnTime = blockEntity.fuelTime;
                 if (blockEntity.isBurning()) {
                     if (fuelSlotNotEmpty) {
                         Item item = itemStack.getItem();
@@ -455,15 +465,10 @@ public abstract class AbstractVFurnaceBlockEntity
 
     public int getFuelTime(ItemStack fuel) {
         if (fuel.isEmpty()) { return 0; }
+
         Item item = fuel.getItem();
         float fuelTime = createFuelTimeMap().getOrDefault(item, 0);
 
-        if(Config.fuelScalesWithSpeed){
-            fuelTime = (int)(fuelTime * this.cookTimeTotalSeconds / 10);
-        }
-        if(fuelTime < 1){
-            fuelTime = 1;
-        }
         return (int)fuelTime;
     }
 
