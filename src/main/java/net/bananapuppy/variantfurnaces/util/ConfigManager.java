@@ -23,10 +23,8 @@ import java.util.Set;
 
 public class ConfigManager {
     private final Logger LOGGER;
-    private final Integer schemaVersion;
 
     private final Class<?> configClazz;
-    private Path configPath = FabricLoader.getInstance().getConfigDir();
     private final File configFile;
 
     public ConfigManager(Integer schemaVersion, String id, Logger logger, Class<?> clazz){
@@ -35,10 +33,10 @@ public class ConfigManager {
     public ConfigManager(Integer schemaVersion, String id, Logger logger, Class<?> configClazz, @Nullable Path path){
 
         this.LOGGER = logger;
-        this.schemaVersion = schemaVersion;
 
         this.configClazz = configClazz;
-        if(path != null){ this.configPath = path; } else { path = this.configPath; }
+
+        if(path == null){ path = FabricLoader.getInstance().getConfigDir(); }
         this.configFile = path.resolve(id + schemaVersion.toString() +".json").toFile();
     }
 

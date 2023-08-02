@@ -3,7 +3,6 @@ package net.bananapuppy.variantfurnaces.registries.commands;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
 import net.bananapuppy.variantfurnaces.MainClass;
-import net.bananapuppy.variantfurnaces.util.ConfigManager;
 import net.minecraft.command.CommandRegistryAccess;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;

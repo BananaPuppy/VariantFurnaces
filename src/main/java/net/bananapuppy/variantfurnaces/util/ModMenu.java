@@ -35,6 +35,7 @@ public class ModMenu implements ModMenuApi {
 
         //TODO: Defined option categories in Config.class
         ConfigCategory general = builder.getOrCreateCategory(Text.translatable("modmenu.variantfurnaces.category.general"));
+        //noinspection CodeBlock2Expr
         general.addEntry(entryBuilder.startBooleanToggle(
                 Text.translatable("modmenu.variantfurnaces.category.general.options.fuelScalesWithSpeed"),
                 Config.fuelScalesWithSpeed
